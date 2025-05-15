@@ -1,0 +1,89 @@
+.info-doctor-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Geist', sans-serif;
+}
+
+.info-doctor-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.info-doctor-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.select-per-page {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.doctor-list {
+  display: grid;
+  gap: 16px;
+}
+
+.doctor-card {
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.doctor-name {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.start-consultation-btn {
+  margin-top: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.start-consultation-btn:hover {
+  background-color: #218838;
+}
+
+.pagination-controls {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.pagination-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination-btn:hover {
+  background-color: #0056b3;
+}
+
+.pagination-info {
+  font-weight: 500;
+}

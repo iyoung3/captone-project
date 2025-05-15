@@ -1,0 +1,99 @@
+.doctor-chat-page {
+  padding: 24px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f4f4;
+}
+
+.chat-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+}
+
+.chat-bubble {
+  max-width: 70%;
+  margin-bottom: 8px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.chat-bubble.sent {
+  background-color: #d1e7ff;
+  margin-left: auto;
+}
+
+.chat-bubble.received {
+  background-color: #e0e0e0;
+}
+
+.chat-input-form {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input-form input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-blue {
+  background-color: #007bff;
+}
+
+.btn-green {
+  background-color: #28a745;
+}
+
+.btn-gray {
+  background-color: #6c757d;
+}
+
+.btn-yellow {
+  background-color: #ffc107;
+  color: black;
+}
+
+.referral-form {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 16px;
+}
+
+.referral-form input,
+.referral-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.referral-buttons {
+  display: flex;
+  gap: 10px;
+}
