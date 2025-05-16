@@ -2,9 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import "../../styles/DoctorChatPage.css";
 import DoctorNavbar from "../../components/DoctorNavbar";
+import {AuthDoctorWrapper} from "../../components/AuthDoctorWrapper";
 
 const DoctorChatPage = () => {
-  const { id: userId } = useParams();
+  const { userId } = useParams();
   const { state } = useLocation();
   const user = state?.user;
   const doctorId = localStorage.getItem("doctorId");
@@ -42,33 +43,13 @@ const DoctorChatPage = () => {
     e.preventDefault();
     if (!input.trim()) return;
 
-    const messageData = {
-      senderId: doctorId,
-      receiverId: userId,
+    console.log("Sending message:", input);
+    const newMessage = {
       message: input,
     };
 
-    try {
-      const res = await fetch(
-        "https://capstone-project.up.railway.app/api/chat/send",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(messageData),
-        }
-      );
-
-      if (res.ok) {
-        setMessages((prev) => [
-          ...prev,
-          { ...messageData, createdAt: new Date().toISOString() },
-        ]);
-        setInput("");
-        scrollToBottom();
-      }
-    } catch (err) {
-      console.error("Gagal mengirim pesan:", err);
-    }
+    ws.send(JSON.stringify(newMessage));
+    setInput('')
   };
 
   const handleSendReferral = async () => {
@@ -81,48 +62,33 @@ const DoctorChatPage = () => {
       notes,
     };
 
-    try {
-      const res = await fetch(
-        "https://capstone-project.up.railway.app/referral/create",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(referralData),
-        }
-      );
-
-      if (res.ok) {
-        const chatMessage = {
-          senderId: doctorId,
-          receiverId: userId,
-          message: `Rujukan: ${referralReason}${notes ? ` - ${notes}` : ""}`,
-          isReferral: true,
-        };
-
-        await fetch("https://capstone-project.up.railway.app/api/chat/send", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(chatMessage),
-        });
-
-        setMessages((prev) => [
-          ...prev,
-          { ...chatMessage, createdAt: new Date().toISOString() },
-        ]);
-        setShowReferralForm(false);
-        setReferralReason("");
-        setReferralDate("");
-        setNotes("");
-        scrollToBottom();
-      } else {
-        alert("Gagal mengirim rujukan.");
-      }
-    } catch (err) {
-      console.error("Gagal mengirim rujukan:", err);
-    }
+    //   TODO: Send referral data to the server
   };
 
+
+  const [ws, setWS] = useState(null);
+  useEffect(() => {
+    const socket = new WebSocket(`${process.env.REACT_APP_API_URL}/doctor/chat/${userId}`)
+    socket.onopen = () => {
+      console.log("WebSocket connection established");
+    }
+    socket.onmessage = (event) => {
+      console.log("Received message:", event.data);
+      setMessages(prevMessages => [...prevMessages, JSON.parse(event.data)]);
+    }
+
+    setWS(socket)
+
+
+    return () => {
+      socket.close()
+    }
+  }, []);
+
   return (
+    <AuthDoctorWrapper>
+
+
     <div>
         <DoctorNavbar />
       <div className="doctor-chat-page">
@@ -133,10 +99,10 @@ const DoctorChatPage = () => {
             <div
               key={idx}
               className={`chat-bubble ${
-                msg.senderId === doctorId ? "sent" : "received"
+                msg.isFromDoctor ? "sent" : "received"
               }`}
             >
-              {msg.isReferral && <strong> Rujukan: </strong>}
+              {/*{msg.isReferral && <strong> Rujukan: </strong>}*/}
               {msg.message}
             </div>
           ))}
@@ -198,6 +164,7 @@ const DoctorChatPage = () => {
         )}
       </div>
     </div>
+    </AuthDoctorWrapper>
   );
 };
 
