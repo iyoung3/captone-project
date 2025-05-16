@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authService";
+import { Link } from "react-router-dom";
 import "../../styles/DoctorLoginPage.css"
 
 export default function DoctorLoginPage() {
@@ -39,6 +40,10 @@ export default function DoctorLoginPage() {
       required
     />
     <button type="submit" className="doctor-login-button">Login</button>
+    <p>
+      Belum punya akun?
+      <Link to='/doctor/register'>Daftar</Link>
+    </p>
   </form>
 </div>
 

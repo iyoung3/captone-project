@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../services/authService";
+import { Link } from "react-router-dom";
 import "../../styles/DoctorRegisterPage.css"
 
 export default function DoctorRegisterPage() {
@@ -88,6 +89,10 @@ export default function DoctorRegisterPage() {
         <button type="submit" className="doctor-register-button">
           Daftar
         </button>
+        <p>
+          Sudah punya akun?
+          <Link to='/doctor/login'>Masuk</Link>
+        </p>
       </form>
     </div>
   );
