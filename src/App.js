@@ -22,20 +22,31 @@ function App() {
         <Route path="/user/login" element={<UserLoginPage />} />
         <Route path="/user/register" element={<UserRegisterPage />} />
         <Route path="/user/home" element={<UserHomePage />} />
+        <Route path="/user/doctor-info/:doctorId" element={<InfoDoctorPage />} />
+
+        <Route path="/user/referral" element={<></>} />
+
+        {/* Isi room chat kayak dm */}
+        <Route path="/user/chat/:doctorId" element={<UserChatPage />} />
+
+        {/* Isi list2 chat */}
+        <Route path="/user/chat" element={<></>} />
+
 
         {/* dokter */}
         <Route path="/doctor/login" element={<DoctorLoginPage />} />
         <Route path="/doctor/register" element={<DoctorRegisterPage />} />
         <Route path="/doctor/home" element={<DoctorHomePage />} />
-
-        {/* info dokter */}
-        <Route path="/doctors" element={<InfoDoctorPage />} />
         <Route path="/doctor/requests" element={<ConsultationRequestsPage />} />
-        <Route path="/doctor/referrals" element={<ReferralPage />} />
 
-        {/* Halaman Chat */}
-        <Route path="/chat/:id" element={<UserChatPage />} />
-        <Route path="/doctor-chat/:id" element={<DoctorChatPage />} />
+        {/* Isi room chat kayak dm */}
+        <Route path="/doctor/chat/:userId" element={<DoctorChatPage />} />
+
+        {/* Isi list2 chat */}
+        <Route path="/doctor/chat" element={<></>} />
+
+        {/* Semi public, ini buat cek detail referral */}
+        <Route path="/referrals/:referralId" element={<ReferralPage />} />
       </Routes>
     </Router>
   );
