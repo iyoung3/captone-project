@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../services/authService";
 import { Link } from "react-router-dom";
 import "../../styles/DoctorLoginPage.css"
+import {loginDoctor} from "../../services/doctorAuthService";
 
 export default function DoctorLoginPage() {
   const [email, setEmail] = useState("");
@@ -12,9 +12,7 @@ export default function DoctorLoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await login({ email, password }, true);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      const data = await loginDoctor({ email, password });
       navigate("/doctor/home");
     } catch (err) {
       alert("Login gagal. Periksa email dan password.");

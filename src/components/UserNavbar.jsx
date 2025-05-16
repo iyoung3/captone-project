@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../src/styles/UserNavbar.css';
+import {logoutUser} from "../services/userAuthService";
 
 export default function UserNavbar() {
+  const handleOnClick = () => {
+    logoutUser()
+  }
+
   return (
     <nav className="navbar">
       <div className="navbar-logo">CP Telemedicine</div>
@@ -11,7 +16,7 @@ export default function UserNavbar() {
         <li><Link to="/doctors">Cari Dokter</Link></li>
         <li><Link to="/chat/:id">Chat</Link></li>
         <li><Link to="">Rujukan Saya</Link></li>
-        <li><Link to="/">Logout</Link></li>
+        <li><Link to="/user/login" onClick={handleOnClick}>Logout</Link></li>
       </ul>
     </nav>
   );

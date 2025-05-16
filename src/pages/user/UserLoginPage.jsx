@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../services/authService";
+import { loginUser } from "../../services/userAuthService";
 import { Link } from "react-router-dom";
 import "../../styles/UserLoginPage.css";
 
@@ -12,7 +12,7 @@ export default function UserLoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await login({ email, password }, false);
+      const data = await loginUser({ email, password });
       navigate("/user/home");
     } catch (err) {
       alert("Login gagal. Periksa email dan password Anda.");
