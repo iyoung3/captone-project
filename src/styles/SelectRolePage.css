@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.select-role-container {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #e8f0f8, #ffffff);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.select-role-container h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #00897b;
+  margin-bottom: 40px;
+}
+
+.select-role-buttons {
+  display: flex;
+  gap: 30px;
+}
+
+.select-role-buttons button {
+  padding: 0.75rem;
+  background-color: #00897b;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transition: background-color 0.3s;
+}
+
+.select-role-buttons button:hover {
+  background-color: #00796b;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 51, 37, 0.3);
+}
