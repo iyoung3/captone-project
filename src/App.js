@@ -10,13 +10,16 @@ import ConsultationRequestsPage from './pages/ConsultationRequestsPage';
 import ReferralPage from './pages/ReferralPage';
 import UserChatPage from "./pages/user/UserChatPage";
 import DoctorChatPage from "./pages/doctor/DoctorChatPage";
+import SelectRolePage from "./pages/SelectRolePage";
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* Landing Page */}
+        <Route path="/" element={<SelectRolePage />} />
         {/* user */}
-        <Route path="/" element={<UserLoginPage />} />
+        <Route path="/user/login" element={<UserLoginPage />} />
         <Route path="/user/register" element={<UserRegisterPage />} />
         <Route path="/user/home" element={<UserHomePage />} />
 

@@ -1,3 +1,5 @@
+import $API from "./api";
+
 const API_BASE = "https://capstone-project.up.railway.app";
 
 // Fungsi untuk login
@@ -5,12 +7,13 @@ export async function login(payload, isDoctor = false) {
   const endpoint = isDoctor ? "/doctor/login" : "/user/login";
   
   try {
-    const res = await fetch(`${API_BASE}${endpoint}`, {
+    const res = await $API(`${endpoint}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      credentials: "include",
     });
     
     if (!res.ok) {
@@ -25,6 +28,26 @@ export async function login(payload, isDoctor = false) {
     throw err;
   }
 }
+
+export const refreshToken = async () => {
+  try {
+    const res = await $API(`/user/refresh`, {
+      method: "POST",
+      credentials: "include",
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error("Error response:", errorData);
+      throw new Error("Gagal memperbarui token.");
+    }
+
+    return res.json();
+  } catch (err) {
+    console.error("Error:", err);
+    throw err;
+  }
+};
 
 // Fungsi untuk registrasi
 export async function register(payload, isDoctor = false) {
