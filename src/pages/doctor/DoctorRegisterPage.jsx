@@ -73,12 +73,25 @@ export default function DoctorRegisterPage() {
           onChange={handleChange}
           placeholder="Rumah Sakit Afiliasi"
         />
-        <input
+        <select
           name="specialization"
           value={form.specialization}
           onChange={handleChange}
-          placeholder="Spesialisasi"
-        />
+          required
+        >
+          <option value="">Pilih Spesialisasi</option>
+          <option value="DERMATOLOGY">DERMATOLOGY</option>
+          <option value="CARDIOLOGY">CARDIOLOGY</option>
+          <option value="NEUROLOGY">NEUROLOGY</option>
+          <option value="PEDIATRICS">PEDIATRICS</option>
+          <option value="PSYCHIATRY">PSYCHIATRY</option>
+          <option value="ORTHOPEDICS">ORTHOPEDICS</option>
+          <option value="GYNECOLOGY">GYNECOLOGY</option>
+          <option value="OPHTHALMOLOGY">OPHTHALMOLOGY</option>
+          <option value="RADIOLOGY">RADIOLOGY</option>
+          <option value="ANESTHESIOLOGY">ANESTHESIOLOGY</option>
+        </select>
+
         <input
           name="licenseNumber"
           value={form.licenseNumber}
