@@ -2,38 +2,35 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../src/styles/InfoDoctorPage.css";
 import UserNavbar from "../components/UserNavbar";
+import {fetchDoctors} from "../services/userService";
 
 export default function InfoDoctorPage() {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [doctors, setDoctors] = useState([]);
-  const [totalPages, setTotalPages] = useState(1);
+  const [total, setTotal] = useState(1);
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
+
   useEffect(() => {
+    const searchDoctors = async (page, perPage) => {
+      try{
+
+        const data = await fetchDoctors({page, perPage})
+
+        setDoctors(data.data);
+          setTotal(data.total);
+      }catch (error) {
+        console.error("Error fetching doctors:", error);
+        alert("Gagal mengambil data dokter.");
+      }
+
+    };
+
     searchDoctors(page, perPage);
   }, [page, perPage]);
 
-  const searchDoctors = (page, perPage) => {
-    const token = localStorage.getItem("token");
-
-    fetch(`https://capstone-project.up.railway.app/user/search-doctors?page=${page}&perPage=${perPage}`, {
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-    })
-      .then(res => res.json())
-      .then(data => {
-        setDoctors(data.doctors || []);
-        setTotalPages(data.totalPages || 1);
-      })
-      .catch(error => {
-        console.error("Terjadi kesalahan saat fetch:", error.message);
-        alert("Gagal mengambil data dokter.");
-      });
-  };
 
   const initiateConsultation = async (doctorId) => {
     try {
@@ -58,11 +55,6 @@ export default function InfoDoctorPage() {
       alert("Terjadi kesalahan.");
     }
   };
-
-  const filteredDoctors = doctors.filter(doctor =>
-    doctor.name.toLowerCase().includes(search.toLowerCase()) ||
-    doctor.specialization.toLowerCase().includes(search.toLowerCase())
-  );
 
   return (
     <div>
@@ -90,7 +82,7 @@ export default function InfoDoctorPage() {
       </div>
 
       <div className="doctor-list">
-        {filteredDoctors.map((doctor) => (
+        {doctors.map((doctor) => (
           <div key={doctor.id} className="doctor-card">
             <p className="doctor-name">{doctor.name}</p>
             <p>Spesialis: {doctor.specialization}</p>
@@ -112,9 +104,9 @@ export default function InfoDoctorPage() {
         >
           Previous
         </button>
-        <span className="pagination-info">Halaman {page} dari {totalPages}</span>
+        <span className="pagination-info">Halaman {page} dari {Math.ceil(total/perPage)}</span>
         <button
-          onClick={() => setPage(page < totalPages ? page + 1 : totalPages)}
+          onClick={() => setPage(page < total ? page + 1 : total)}
           className="pagination-btn"
         >
           Next

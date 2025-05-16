@@ -12,14 +12,9 @@ export default function UserLoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Data login yang dikirim:", { email, password });
       const data = await login({ email, password }, false);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      console.log("Token disimpan:", data.token);
       navigate("/user/home");
     } catch (err) {
-      console.error("Login gagal:", err);
       alert("Login gagal. Periksa email dan password Anda.");
     }
   };
