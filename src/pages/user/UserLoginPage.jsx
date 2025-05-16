@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/authService";
-import '../../styles/UserLoginPage.css'
+import { Link } from "react-router-dom";
+import "../../styles/UserLoginPage.css";
 
 export default function UserLoginPage() {
   const [email, setEmail] = useState("");
@@ -44,6 +45,9 @@ export default function UserLoginPage() {
         <button type="submit" className="login-button">
           Login
         </button>
+        <p>
+          belum punya akun?<Link to="/user/register">daftar</Link>
+        </p>
       </form>
     </div>
   );
