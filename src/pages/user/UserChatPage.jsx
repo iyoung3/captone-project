@@ -25,29 +25,43 @@ const UserChatPage = () => {
       message: input,
     };
 
-    ws.send(JSON.stringify(newMessage));
+    ws.current?.send(JSON.stringify(newMessage));
     setInput('')
   };
 
-  const [ws, setWS] = useState(null);
-  useEffect(() => {
-    const socket = new WebSocket(`${process.env.REACT_APP_API_URL}/user/chat/${doctorId}`)
+const ws = useRef(null);
+useEffect(() => {
+  let socket;
+
+  const connectWebSocket = () => {
+    socket = new WebSocket(`${process.env.REACT_APP_API_URL}/user/chat/${doctorId}`);
+    ws.current = socket;
     socket.onopen = () => {
       console.log("WebSocket connection established");
-    }
+    };
 
     socket.onmessage = (event) => {
       console.log("Received message:", event.data);
-      setMessages(prevMessages => [...prevMessages, JSON.parse(event.data)]);
-    }
+      setMessages((prevMessages) => [...prevMessages, JSON.parse(event.data)]);
+    };
 
-    setWS(socket)
+    socket.onclose = () => {
+      console.log("WebSocket connection closed. Reconnecting...");
+      setTimeout(connectWebSocket, 1000); // Reconnect after 1 second
+    };
 
+    socket.onerror = (error) => {
+      console.error("WebSocket error:", error);
+      socket.close();
+    };
+  };
 
-    return () => {
-      socket.close()
-    }
-  }, []);
+  connectWebSocket();
+
+  return () => {
+    ws.current?.close();
+  };
+}, []);
 
   const handlePrintReferral = () => {
     const referralMessage = messages.find((msg) => msg.isReferral);
