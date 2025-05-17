@@ -22,11 +22,16 @@
   border: 1px solid #ddd;
 }
 
+
 .chat-bubble {
   max-width: 70%;
-  margin-bottom: 8px;
-  padding: 10px;
-  border-radius: 8px;
+  width: max-content;
+  padding: 10px 14px;
+  margin: 10px 0;
+  border-radius: 20px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
 }
 
 .chat-bubble.sent {

@@ -46,6 +46,7 @@ const DoctorChatRoomPage = () => {
     console.log("Sending message:", input);
     const newMessage = {
       message: input,
+      messageType: "text",
     };
 
     ws.current?.send(JSON.stringify(newMessage));

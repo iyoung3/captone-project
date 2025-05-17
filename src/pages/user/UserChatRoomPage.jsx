@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "../../styles/UserChatPage.css";
 import UserNavbar from "../../components/UserNavbar";
 import {AuthUserWrapper} from "../../components/AuthUserWrapper";
 
 const UserChatRoomPage = () => {
   const { doctorId } = useParams();
-  const { state } = useLocation();
-  const doctor = state?.doctor;
 
   const [messages, setMessages] = useState([]);
   const [chatHistory, setChatHistory] = useState([]);
@@ -74,7 +72,7 @@ useEffect(() => {
       <html>
         <head><title>Rujukan Dokter</title></head>
         <body>
-          <h2>Rujukan dari Dr. ${doctor?.name}</h2>
+          <h2>Rujukan dari Dr. ${doctorId}</h2>
           <p><strong>Pesan Rujukan:</strong> ${referralMessage.message}</p>
           <button onclick="window.print();">Cetak</button>
         </body>
@@ -88,11 +86,11 @@ useEffect(() => {
       <div>
           <UserNavbar />
           <div className="chat-page">
-        <h1 className="chat-title">Chat dengan Dr. {doctor?.name}</h1>
+        <h1 className="chat-title">Chat dengan Dr. {doctorId}</h1>
         <div className="chat-box">
           {messages.length === 0 ? (
             <div className="empty-chat">
-              <p>Belum ada percakapan. Kirim pesan pertama ke Dr. {doctor?.name || "Dokter"}!</p>
+              <p>Belum ada percakapan. Kirim pesan pertama ke Dr. {doctorId || "Dokter"}!</p>
             </div>
           ) : (
             messages.map((msg, idx) => (
