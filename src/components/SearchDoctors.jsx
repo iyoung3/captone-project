@@ -11,6 +11,7 @@ export default function SearchDoctors() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
+  const totalPage = Math.ceil(total / perPage);
 
   useEffect(() => {
     const searchDoctors = async (page, perPage) => {
@@ -91,9 +92,9 @@ export default function SearchDoctors() {
         >
           Previous
         </button>
-        <span className="pagination-info">Halaman {page} dari {Math.ceil(total/perPage)}</span>
+        <span className="pagination-info">Halaman {page} dari {totalPage}</span>
         <button
-          onClick={() => setPage(page < total ? page + 1 : total)}
+          onClick={() => setPage(page < totalPage ? page + 1 : totalPage)}
           className="pagination-btn"
         >
           Next

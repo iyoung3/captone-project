@@ -6,6 +6,8 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 
+ENV REACT_APP_API_URL=https://capstone-project.up.railway.app
+
 COPY . .
 RUN npm run build
 
