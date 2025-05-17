@@ -23,7 +23,18 @@ export const initiateConsultation = async (doctorId) => {
     return response.json();
 }
 
+export const getChats = async () => {
+  const response = await $API(`/user/chat/list`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch chat list");
+  }
+
+  return response.json();
+};
+
 export const fetchDoctorDetail = async (id) => {
   const response = await $API(`/doctors/${id}`);
   return response.data;
 };
+

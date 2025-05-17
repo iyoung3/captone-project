@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../src/styles/InfoDoctorPage.css";
-import UserNavbar from "../components/UserNavbar";
-import {fetchDoctors} from "../services/userService";
+import "../styles/InfoDoctorPage.css";
+import {fetchDoctors, initiateConsultation} from "../services/userService";
 
-export default function InfoDoctorPage() {
+export default function SearchDoctors() {
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   const [doctors, setDoctors] = useState([]);
@@ -32,23 +31,12 @@ export default function InfoDoctorPage() {
   }, [page, perPage]);
 
 
-  const initiateConsultation = async (doctorId) => {
+  const handleOnClick = async (doctorId) => {
     try {
-      const res = await fetch('https://capstone-project.up.railway.app/user/initiate-consultation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-        body: JSON.stringify({ doctorId }),
-      });
+      const res = await initiateConsultation(doctorId);
 
-      const result = await res.json();
-      if (res.ok) {
-        alert("Konsultasi dimulai.");
-        navigate(`/user/chat/${doctorId}`, { state: { doctor: result.doctor } });
-      } else {
-        alert(result.message || "Gagal memulai konsultasi.");
+      if (res) {
+        navigate(`/user/chat/${doctorId}`);
       }
     } catch (err) {
       console.error("Gagal memulai konsultasi:", err);
@@ -58,7 +46,6 @@ export default function InfoDoctorPage() {
 
   return (
     <div>
-      <UserNavbar />
       <div className="info-doctor-container">
       <h1 className="info-doctor-title">Cari Dokter</h1>
 
@@ -83,12 +70,12 @@ export default function InfoDoctorPage() {
 
       <div className="doctor-list">
         {doctors.map((doctor) => (
-          <div key={doctor.id} className="doctor-card">
+          <div key={doctor.doctorId} className="doctor-card">
             <p className="doctor-name">{doctor.name}</p>
             <p>Spesialis: {doctor.specialization}</p>
             <p>Rumah Sakit: {doctor.hospitalAffiliation}</p>
             <button
-              onClick={() => initiateConsultation(doctor.id)}
+              onClick={() => handleOnClick(doctor.doctorId)}
               className="start-consultation-btn"
             >
               Mulai Konsultasi

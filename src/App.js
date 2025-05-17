@@ -4,13 +4,14 @@ import UserRegisterPage from "./pages/user/UserRegisterPage";
 import UserHomePage from "./pages/user/UserHomePage";
 import DoctorLoginPage from "./pages/doctor/DoctorLoginPage";
 import DoctorRegisterPage from "./pages/doctor/DoctorRegisterPage";
-import InfoDoctorPage from "./pages/InfoDoctorPage";
 import DoctorHomePage from "./pages/doctor/DoctorHomePage";
 import ConsultationRequestsPage from './pages/ConsultationRequestsPage';
 import ReferralPage from './pages/ReferralPage';
-import UserChatPage from "./pages/user/UserChatPage";
-import DoctorChatPage from "./pages/doctor/DoctorChatPage";
+import UserChatRoomPage from "./pages/user/UserChatRoomPage";
+import DoctorChatRoomPage from "./pages/doctor/DoctorChatRoomPage";
 import SelectRolePage from "./pages/SelectRolePage";
+import UserChatListPage from "./pages/user/UserChatListPage";
+import DoctorChatListPage from "./pages/doctor/DoctorChatListPage";
 
 function App() {
   return (
@@ -22,15 +23,15 @@ function App() {
         <Route path="/user/login" element={<UserLoginPage />} />
         <Route path="/user/register" element={<UserRegisterPage />} />
         <Route path="/user/home" element={<UserHomePage />} />
-        <Route path="/user/doctor-info/:doctorId" element={<InfoDoctorPage />} />
+        <Route path="/user/doctor-info/:doctorId" element={<></>} />
 
         <Route path="/user/referral" element={<></>} />
 
         {/* Isi room chat kayak dm */}
-        <Route path="/user/chat/:doctorId" element={<UserChatPage />} />
+        <Route path="/user/chat/:doctorId" element={<UserChatRoomPage />} />
 
         {/* Isi list2 chat */}
-        <Route path="/user/chat" element={<></>} />
+        <Route path="/user/chat" element={<UserChatListPage/>} />
 
 
         {/* dokter */}
@@ -40,10 +41,10 @@ function App() {
         <Route path="/doctor/requests" element={<ConsultationRequestsPage />} />
 
         {/* Isi room chat kayak dm */}
-        <Route path="/doctor/chat/:userId" element={<DoctorChatPage />} />
+        <Route path="/doctor/chat/:userId" element={<DoctorChatRoomPage />} />
 
         {/* Isi list2 chat */}
-        <Route path="/doctor/chat" element={<></>} />
+        <Route path="/doctor/chat" element={<DoctorChatListPage />} />
 
         {/* Semi public, ini buat cek detail referral */}
         <Route path="/referrals/:referralId" element={<ReferralPage />} />

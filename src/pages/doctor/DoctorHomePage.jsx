@@ -26,7 +26,7 @@ export default function DoctorHomePage() {
             </li>
             <li
               className="doctor-home-item"
-              onClick={() => handleNavigation("/doctor-chat/:id")}
+              onClick={() => handleNavigation("/doctor/chat")}
             >
               Mulai Chat dengan Pasien
             </li>

@@ -4,7 +4,7 @@ import "../../styles/UserChatPage.css";
 import UserNavbar from "../../components/UserNavbar";
 import {AuthUserWrapper} from "../../components/AuthUserWrapper";
 
-const UserChatPage = () => {
+const UserChatRoomPage = () => {
   const { doctorId } = useParams();
   const { state } = useLocation();
   const doctor = state?.doctor;
@@ -35,8 +35,8 @@ useEffect(() => {
 
   const connectWebSocket = () => {
     socket = new WebSocket(`${process.env.REACT_APP_API_URL}/user/chat/${doctorId}`);
-    ws.current = socket;
     socket.onopen = () => {
+      ws.current = socket;
       console.log("WebSocket connection established");
     };
 
@@ -46,20 +46,22 @@ useEffect(() => {
     };
 
     socket.onclose = () => {
-      console.log("WebSocket connection closed. Reconnecting...");
-      setTimeout(connectWebSocket, 1000); // Reconnect after 1 second
+      console.log("WebSocket connection closed. ");
+      // setTimeout(connectWebSocket, 1000); // Reconnect after 1 second
     };
 
     socket.onerror = (error) => {
       console.error("WebSocket error:", error);
       socket.close();
+      ws.current = null;
     };
   };
 
   connectWebSocket();
 
   return () => {
-    ws.current?.close();
+    socket?.close();
+    ws.current = null;
   };
 }, []);
 
@@ -135,4 +137,4 @@ useEffect(() => {
   );
 };
 
-export default UserChatPage;
+export default UserChatRoomPage;
