@@ -9,3 +9,16 @@ export const getChats = async () => {
 
     return response.json();
 };
+
+export const createDoctorReferral = async (data) => {
+    const response = await $API(`/referral/create`, {
+        method: "POST",
+        body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to create referral");
+    }
+
+    return response.json();
+}

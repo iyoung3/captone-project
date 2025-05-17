@@ -33,6 +33,16 @@ export const getChats = async () => {
   return response.json();
 };
 
+export const getReferral = async (referralId) => {
+  const response = await $API(`/referral/${referralId}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch referral");
+  }
+
+  return response.json();
+}
+
 export const fetchDoctorDetail = async (id) => {
   const response = await $API(`/doctors/${id}`);
   return response.data;

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import "../../styles/UserChatPage.css";
 import UserNavbar from "../../components/UserNavbar";
 import {AuthUserWrapper} from "../../components/AuthUserWrapper";
+import ReferralEmbed from "../../components/ReferralEmbed";
 
 const UserChatRoomPage = () => {
   const { doctorId } = useParams();
@@ -63,23 +64,8 @@ useEffect(() => {
   };
 }, []);
 
-  const handlePrintReferral = () => {
-    const referralMessage = messages.find((msg) => msg.isReferral);
-    if (!referralMessage) return alert("Tidak ada rujukan untuk dicetak.");
+  const [referral, setReferral] = useState(null);
 
-    const printWindow = window.open("", "", "height=500,width=800");
-    printWindow.document.write(`
-      <html>
-        <head><title>Rujukan Dokter</title></head>
-        <body>
-          <h2>Rujukan dari Dr. ${doctorId}</h2>
-          <p><strong>Pesan Rujukan:</strong> ${referralMessage.message}</p>
-          <button onclick="window.print();">Cetak</button>
-        </body>
-      </html>
-    `);
-    printWindow.document.close();
-  };
 
   return (
     <AuthUserWrapper>
@@ -96,7 +82,13 @@ useEffect(() => {
             messages.map((msg, idx) => (
               <div key={idx} className={`chat-bubble ${!msg.isFromDoctor ? "sent" : "received"}`}>
                 {/*{msg.isReferral && <strong>Rujukan: </strong>}*/}
-                {msg.message}
+                {msg.messageType === 'text'?
+                    <div className="chat-text">
+
+                      {msg.message}
+                    </div>:
+                    <ReferralEmbed referralId={msg.message}/>
+                }
               </div>
             ))
           )}
@@ -113,8 +105,6 @@ useEffect(() => {
           />
           <button type="submit" className="chat-send-btn">Kirim</button>
         </form>
-
-        <button onClick={handlePrintReferral} className="print-btn">Cetak Rujukan</button>
 
         {chatHistory.length > 0 && (
           <div className="chat-history">

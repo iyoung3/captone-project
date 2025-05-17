@@ -3,6 +3,8 @@ import { useLocation, useParams } from "react-router-dom";
 import "../../styles/DoctorChatPage.css";
 import DoctorNavbar from "../../components/DoctorNavbar";
 import {AuthDoctorWrapper} from "../../components/AuthDoctorWrapper";
+import {createDoctorReferral} from "../../services/doctorService";
+import ReferralEmbed from "../../components/ReferralEmbed";
 
 const DoctorChatRoomPage = () => {
   const { userId } = useParams();
@@ -63,6 +65,21 @@ const DoctorChatRoomPage = () => {
       notes,
     };
 
+    const response = await createDoctorReferral(referralData)
+
+    if (response) {
+      console.log("Referral sent successfully:", response);
+
+      const content = {
+        message: response.data.referralId,
+        messageType: "referral",
+      }
+
+      ws.current?.send(JSON.stringify(content));
+    }else {
+      console.error("Failed to send referral");
+    }
+
     //   TODO: Send referral data to the server
   };
 
@@ -120,7 +137,13 @@ useEffect(() => {
               }`}
             >
               {/*{msg.isReferral && <strong> Rujukan: </strong>}*/}
-              {msg.message}
+              {msg.messageType === 'text'?
+                  <div className="chat-text">
+
+                    {msg.message}
+                  </div>:
+                  <ReferralEmbed referralId={msg.message}/>
+              }
             </div>
           ))}
           <div ref={chatEndRef} />
