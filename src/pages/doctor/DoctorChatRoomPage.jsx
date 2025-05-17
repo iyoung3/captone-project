@@ -20,20 +20,7 @@ const DoctorChatRoomPage = () => {
   const [notes, setNotes] = useState("");
   const chatEndRef = useRef(null);
 
-  useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const res = await fetch(
-          `https://capstone-project.up.railway.app/api/chat/${doctorId}/${userId}`
-        );
-        const data = await res.json();
-        setMessages(data);
-      } catch (err) {
-        console.error("Gagal mengambil pesan:", err);
-      }
-    };
-    fetchMessages();
-  }, [doctorId, userId]);
+  const [permitted, setPermitted] = useState(false);
 
   const scrollToBottom = () => {
     setTimeout(() => {
@@ -42,6 +29,7 @@ const DoctorChatRoomPage = () => {
   };
 
   const handleSendMessage = async (e) => {
+    if(!permitted)return alert('Error')
     e.preventDefault();
     if (!input.trim()) return;
 
@@ -56,6 +44,7 @@ const DoctorChatRoomPage = () => {
   };
 
   const handleSendReferral = async () => {
+    if(!permitted)return alert('Error')
     if (!referralReason.trim()) return;
 
     const referralData = {
@@ -93,6 +82,7 @@ useEffect(() => {
     socket.onopen = () => {
       console.log("WebSocket connection established");
       ws.current = socket;
+      setPermitted(true)
     };
 
     socket.onmessage = (event) => {
@@ -100,7 +90,8 @@ useEffect(() => {
       setMessages((prevMessages) => [...prevMessages, JSON.parse(event.data)]);
     };
 
-    socket.onclose = () => {
+    socket.onclose = (event) => {
+      setPermitted(false)
       console.log("WebSocket connection closed.");
       // setTimeout(connectWebSocket, 1000); // Reconnect after 1 second
     };
@@ -150,58 +141,56 @@ useEffect(() => {
         </div>
 
         {showReferralForm ? (
-          <div className="referral-form">
-            <h2>Formulir Rujukan</h2>
-            <input
-              type="text"
-              placeholder="Alasan rujukan"
-              value={referralReason}
-              onChange={(e) => setReferralReason(e.target.value)}
-              required
-            />
-            <input
-              type="date"
-              value={referralDate}
-              onChange={(e) => setReferralDate(e.target.value)}
-            />
-            <textarea
-              placeholder="Catatan tambahan"
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              rows={3}
-            />
-            <div className="referral-buttons">
-              <button onClick={handleSendReferral} className="btn btn-green">
-                Kirim Rujukan
-              </button>
-              <button
-                onClick={() => setShowReferralForm(false)}
-                className="btn btn-gray"
-              >
-                Batal
-              </button>
+            <div className="referral-form">
+              <h2>Formulir Rujukan</h2>
+              <input
+                  type="text"
+                  placeholder="Alasan rujukan"
+                  value={referralReason}
+                  onChange={(e) => setReferralReason(e.target.value)}
+                  required
+              />
+              <input
+                  type="date"
+                  value={referralDate}
+                  onChange={(e) => setReferralDate(e.target.value)}
+              />
+              <textarea
+                  placeholder="Catatan tambahan"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  rows={3}
+              />
+              <div className="referral-buttons">
+                <button onClick={handleSendReferral} className="btn btn-green">
+                  Kirim Rujukan
+                </button>
+                <button
+                    onClick={() => setShowReferralForm(false)}
+                    className="btn btn-gray"
+                >
+                  Batal
+                </button>
+              </div>
             </div>
-          </div>
-        ) : (
-          <form onSubmit={handleSendMessage} className="chat-input-form">
-            <input
+        ) : permitted && <form onSubmit={handleSendMessage} className="chat-input-form">
+          <input
               type="text"
               placeholder="Ketik pesan..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-            />
-            <button type="submit" className="btn btn-blue">
-              Kirim
-            </button>
-            <button
+          />
+          <button type="submit" className="btn btn-blue">
+            Kirim
+          </button>
+          <button
               type="button"
               onClick={() => setShowReferralForm(true)}
               className="btn btn-yellow"
-            >
-              Rujukan
-            </button>
-          </form>
-        )}
+          >
+            Rujukan
+          </button>
+        </form>}
       </div>
     </div>
     </AuthDoctorWrapper>

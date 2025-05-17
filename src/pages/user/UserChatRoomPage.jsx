@@ -13,9 +13,10 @@ const UserChatRoomPage = () => {
   const [input, setInput] = useState("");
   const chatEndRef = useRef(null);
 
-
+  const [permitted, setPermitted] = useState(false);
 
   const handleSend = async (e) => {
+    if(!permitted)return alert('Error')
     e.preventDefault();
     if (!input.trim()) return;
 
@@ -28,44 +29,43 @@ const UserChatRoomPage = () => {
     setInput('')
   };
 
-const ws = useRef(null);
-useEffect(() => {
-  let socket;
+  const ws = useRef(null);
+  useEffect(() => {
+    let socket;
 
-  const connectWebSocket = () => {
-    socket = new WebSocket(`${process.env.REACT_APP_API_URL}/user/chat/${doctorId}`);
-    socket.onopen = () => {
-      ws.current = socket;
-      console.log("WebSocket connection established");
+    const connectWebSocket = () => {
+      socket = new WebSocket(`${process.env.REACT_APP_API_URL}/user/chat/${doctorId}`);
+      socket.onopen = () => {
+        ws.current = socket;
+        console.log("WebSocket connection established");
+        setPermitted(true)
+      };
+
+      socket.onmessage = (event) => {
+        console.log("Received message:", event.data);
+        setMessages((prevMessages) => [...prevMessages, JSON.parse(event.data)]);
+      };
+
+      socket.onclose = (event) => {
+        if(event.code === 4000)setPermitted(false)
+        console.log("WebSocket connection closed. ");
+        // setTimeout(connectWebSocket, 1000); // Reconnect after 1 second
+      };
+
+      socket.onerror = (error) => {
+        console.error("WebSocket error:", error);
+        socket.close();
+        ws.current = null;
+      };
     };
 
-    socket.onmessage = (event) => {
-      console.log("Received message:", event.data);
-      setMessages((prevMessages) => [...prevMessages, JSON.parse(event.data)]);
-    };
+    connectWebSocket();
 
-    socket.onclose = () => {
-      console.log("WebSocket connection closed. ");
-      // setTimeout(connectWebSocket, 1000); // Reconnect after 1 second
-    };
-
-    socket.onerror = (error) => {
-      console.error("WebSocket error:", error);
-      socket.close();
+    return () => {
+      socket?.close();
       ws.current = null;
     };
-  };
-
-  connectWebSocket();
-
-  return () => {
-    socket?.close();
-    ws.current = null;
-  };
-}, []);
-
-  const [referral, setReferral] = useState(null);
-
+  }, []);
 
   return (
     <AuthUserWrapper>
@@ -95,16 +95,16 @@ useEffect(() => {
           <div ref={chatEndRef}/>
         </div>
 
-            <form onSubmit={handleSend} className="chat-input-form">
+            {permitted && <form onSubmit={handleSend} className="chat-input-form">
               <input
-                type="text"
-                placeholder="Ketik pesan..."
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            className="chat-input"
-          />
-          <button type="submit" className="chat-send-btn">Kirim</button>
-        </form>
+                  type="text"
+                  placeholder="Ketik pesan..."
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  className="chat-input"
+              />
+              <button type="submit" className="chat-send-btn">Kirim</button>
+            </form>}
 
         {chatHistory.length > 0 && (
           <div className="chat-history">
