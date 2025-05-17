@@ -1,19 +1,28 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {useEffect, useState, useRef, Fragment} from "react";
 import { useParams } from "react-router-dom";
 import "../../styles/UserChatPage.css";
 import UserNavbar from "../../components/UserNavbar";
 import {AuthUserWrapper} from "../../components/AuthUserWrapper";
 import ReferralEmbed from "../../components/ReferralEmbed";
+import {fetchChatHistory} from "../../services/userService";
 
 const UserChatRoomPage = () => {
   const { doctorId } = useParams();
 
   const [messages, setMessages] = useState([]);
-  const [chatHistory, setChatHistory] = useState([]);
   const [input, setInput] = useState("");
   const chatEndRef = useRef(null);
 
   const [permitted, setPermitted] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+        const response = await fetchChatHistory(doctorId);
+        // console.log(response);
+        const reversedArr = response.data.reverse();
+        setMessages(() => [...(response.data.reverse())]);
+    })()
+  }, []);
 
   const handleSend = async (e) => {
     if(!permitted)return alert('Error')
@@ -43,7 +52,7 @@ const UserChatRoomPage = () => {
 
       socket.onmessage = (event) => {
         console.log("Received message:", event.data);
-        setMessages((prevMessages) => [...prevMessages, JSON.parse(event.data)]);
+        setMessages((prevMessages) => [JSON.parse(event.data), ...prevMessages]);
       };
 
       socket.onclose = (event) => {
@@ -79,17 +88,18 @@ const UserChatRoomPage = () => {
               <p>Belum ada percakapan. Kirim pesan pertama ke Dr. {doctorId || "Dokter"}!</p>
             </div>
           ) : (
-            messages.map((msg, idx) => (
-              <div key={idx} className={`chat-bubble ${!msg.isFromDoctor ? "sent" : "received"}`}>
-                {/*{msg.isReferral && <strong>Rujukan: </strong>}*/}
-                {msg.messageType === 'text'?
-                    <div className="chat-text">
-
-                      {msg.message}
-                    </div>:
-                    <ReferralEmbed referralId={msg.message}/>
-                }
-              </div>
+            messages.map((msg) => (
+                <Fragment key={msg.chatId}>
+                  <div className={`chat-bubble ${!msg.isFromDoctor ? "sent" : "received"}`}>
+                    {/*{msg.isReferral && <strong>Rujukan: </strong>}*/}
+                    {msg.messageType === 'referral'?
+                        <ReferralEmbed referralId={msg.message}/>:
+                        <div className="chat-text">
+                          {msg.message}
+                        </div>
+                    }
+                  </div>
+                </Fragment>
             ))
           )}
           <div ref={chatEndRef}/>
@@ -105,19 +115,6 @@ const UserChatRoomPage = () => {
               />
               <button type="submit" className="chat-send-btn">Kirim</button>
             </form>}
-
-        {chatHistory.length > 0 && (
-          <div className="chat-history">
-            <h2>Riwayat Konsultasi</h2>
-            <ul>
-              {chatHistory.map((item, index) => (
-                <li key={index}>
-                  Dr. {item.doctorName} - {new Date(item.lastMessageTime).toLocaleString()}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
       </div>
     </AuthUserWrapper>

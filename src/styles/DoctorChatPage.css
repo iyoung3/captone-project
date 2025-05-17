@@ -20,6 +20,8 @@
   border-radius: 8px;
   margin-bottom: 16px;
   border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 

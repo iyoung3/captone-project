@@ -1,16 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "../../styles/DoctorChatPage.css";
 import DoctorNavbar from "../../components/DoctorNavbar";
 import {AuthDoctorWrapper} from "../../components/AuthDoctorWrapper";
 import {createDoctorReferral} from "../../services/doctorService";
 import ReferralEmbed from "../../components/ReferralEmbed";
+import {fetchChatHistory} from "../../services/doctorService";
 
 const DoctorChatRoomPage = () => {
   const { userId } = useParams();
-  const { state } = useLocation();
-  const user = state?.user;
-  const doctorId = localStorage.getItem("doctorId");
 
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -27,6 +25,17 @@ const DoctorChatRoomPage = () => {
       chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
   };
+
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetchChatHistory(userId);
+      // console.log(response);
+      const reversedArr = response.data.reverse();
+
+      setMessages(() => [...response.data.reverse()]);
+    })()
+  }, []);
 
   const handleSendMessage = async (e) => {
     if(!permitted)return alert('Error')
@@ -87,7 +96,7 @@ useEffect(() => {
 
     socket.onmessage = (event) => {
       console.log("Received message:", event.data);
-      setMessages((prevMessages) => [...prevMessages, JSON.parse(event.data)]);
+      setMessages((prevMessages) => [JSON.parse(event.data),...prevMessages]);
     };
 
     socket.onclose = (event) => {
@@ -117,12 +126,12 @@ useEffect(() => {
     <div>
         <DoctorNavbar />
       <div className="doctor-chat-page">
-        <h1 className="chat-title">Chat dengan {user?.name}</h1>
+        <h1 className="chat-title">Chat dengan {userId}</h1>
 
         <div className="chat-box">
-          {messages.map((msg, idx) => (
+          {messages.map((msg) => (
             <div
-              key={idx}
+              key={msg.chatId}
               className={`chat-bubble ${
                 msg.isFromDoctor ? "sent" : "received"
               }`}

@@ -48,3 +48,13 @@ export const fetchDoctorDetail = async (id) => {
   return response.data;
 };
 
+
+export const fetchChatHistory = async (doctorId) => {
+    const response = await $API(`/user/chat/${doctorId}/history`);
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch chat history");
+    }
+
+    return response.json();
+}

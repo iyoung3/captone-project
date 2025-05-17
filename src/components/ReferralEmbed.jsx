@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import {getReferral} from "../services/userService";
 
-export default function ReferralEmbed({referralId}) {
+function ReferralEmbed({referralId}) {
   const [referral, setReferral] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -39,3 +39,5 @@ export default function ReferralEmbed({referralId}) {
   );
 
 }
+
+export default memo(ReferralEmbed);

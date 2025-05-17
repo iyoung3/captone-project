@@ -22,3 +22,14 @@ export const createDoctorReferral = async (data) => {
 
     return response.json();
 }
+
+
+export const fetchChatHistory = async (userId) => {
+    const response = await $API(`/doctor/chat/${userId}/history`);
+
+    if (!response.ok) {
+        throw new Error("Failed to fetch chat history");
+    }
+
+    return response.json();
+}
