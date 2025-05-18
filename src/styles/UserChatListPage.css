@@ -1,0 +1,74 @@
+@import url("https://unpkg.com/@geist/font/style.css");
+
+.chat-list-page {
+  font-family: 'Geist', sans-serif;
+  background-color: #f0f2f5;
+  min-height: 100vh;
+}
+
+.chat-list-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 1rem;
+}
+
+.chat-list-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #202c33;
+}
+
+.chat-list-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  border-bottom: 1px solid #e5e5e5;
+  transition: background 0.2s;
+  color: #111;
+}
+
+.chat-list-item:hover {
+  background-color: #f5f5f5;
+}
+
+.chat-avatar {
+  background-color: #007bff;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-size: 1.1rem;
+}
+
+.chat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-name {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.chat-preview {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.empty-list {
+  text-align: center;
+  color: #777;
+  margin-top: 2rem;
+}

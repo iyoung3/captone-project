@@ -14,8 +14,8 @@ export default function UserNavbar() {
       <ul className="navbar-links">
         <li><Link to="/user/home">Beranda</Link></li>
         <li><Link to="/doctors">Cari Dokter</Link></li>
-        <li><Link to="/chat/:id">Chat</Link></li>
-        <li><Link to="">Rujukan Saya</Link></li>
+        <li><Link to="/user/chat">Chat</Link></li>
+        <li><Link to="/user/referrals">Rujukan Saya</Link></li>
         <li><Link to="/user/login" onClick={handleOnClick}>Logout</Link></li>
       </ul>
     </nav>

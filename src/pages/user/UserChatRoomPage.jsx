@@ -1,12 +1,14 @@
-import React, {useEffect, useState, useRef, Fragment} from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useRef, Fragment } from "react";
+import { Link, useParams } from "react-router-dom";
 import "../../styles/UserChatPage.css";
 import UserNavbar from "../../components/UserNavbar";
-import {AuthUserWrapper} from "../../components/AuthUserWrapper";
+import { AuthUserWrapper } from "../../components/AuthUserWrapper";
 import ReferralEmbed from "../../components/ReferralEmbed";
-import {fetchChatHistory} from "../../services/userService";
+import { fetchChatHistory } from "../../services/userService";
+import { useNavigate } from "react-router-dom";
 
 const UserChatRoomPage = () => {
+  const navigate = useNavigate();
   const { doctorId } = useParams();
 
   const [messages, setMessages] = useState([]);
@@ -17,15 +19,15 @@ const UserChatRoomPage = () => {
 
   useEffect(() => {
     (async () => {
-        const response = await fetchChatHistory(doctorId);
-        // console.log(response);
-        const reversedArr = response.data.reverse();
-        setMessages(() => [...(response.data.reverse())]);
+      const response = await fetchChatHistory(doctorId);
+      // console.log(response);
+      const reversedArr = response.data.reverse();
+      setMessages(() => [...(response.data.reverse())]);
     })()
   }, []);
 
   const handleSend = async (e) => {
-    if(!permitted)return alert('Error')
+    if (!permitted) return alert('Error')
     e.preventDefault();
     if (!input.trim()) return;
 
@@ -56,7 +58,7 @@ const UserChatRoomPage = () => {
       };
 
       socket.onclose = (event) => {
-        if(event.code === 4000)setPermitted(false)
+        if (event.code === 4000) setPermitted(false)
         console.log("WebSocket connection closed. ");
         // setTimeout(connectWebSocket, 1000); // Reconnect after 1 second
       };
@@ -78,45 +80,42 @@ const UserChatRoomPage = () => {
 
   return (
     <AuthUserWrapper>
-      <div>
-          <UserNavbar />
-          <div className="chat-page">
-        <h1 className="chat-title">Chat dengan Dr. {doctorId}</h1>
-        <div className="chat-box">
-          {messages.length === 0 ? (
-            <div className="empty-chat">
-              <p>Belum ada percakapan. Kirim pesan pertama ke Dr. {doctorId || "Dokter"}!</p>
-            </div>
-          ) : (
-            messages.map((msg) => (
+        <div className="chat-page">
+          <h1 className="chat-title"><button onClick={() => navigate("/user/chat")} className="back-btn">⬅</button>Chat dengan Dr. {doctorId}</h1>
+          <div className="chat-box">
+            {messages.length === 0 ? (
+              <div className="empty-chat">
+                <p>Belum ada percakapan. Kirim pesan pertama ke Dr. {doctorId || "Dokter"}!</p>
+              </div>
+            ) : (
+              messages.map((msg) => (
                 <Fragment key={msg.chatId}>
                   <div className={`chat-bubble ${!msg.isFromDoctor ? "sent" : "received"}`}>
                     {/*{msg.isReferral && <strong>Rujukan: </strong>}*/}
-                    {msg.messageType === 'referral'?
-                        <ReferralEmbed referralId={msg.message}/>:
-                        <div className="chat-text">
-                          {msg.message}
-                        </div>
+                    {msg.messageType === 'referral' ?
+                      <ReferralEmbed referralId={msg.message} /> :
+                      <div className="chat-text">
+                        {msg.message}
+                      </div>
                     }
                   </div>
                 </Fragment>
-            ))
-          )}
-          <div ref={chatEndRef}/>
-        </div>
+              ))
+            )}
+            <div ref={chatEndRef} />
+          </div>
 
-            {permitted && <form onSubmit={handleSend} className="chat-input-form">
-              <input
-                  type="text"
-                  placeholder="Ketik pesan..."
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  className="chat-input"
-              />
-              <button type="submit" className="chat-send-btn">Kirim</button>
-            </form>}
-      </div>
-      </div>
+          {permitted && <form onSubmit={handleSend} className="chat-input-form">
+            <input
+              type="text"
+              placeholder="Ketik pesan..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className="chat-input"
+            />
+            <button type="submit" className="chat-send-btn">Kirim</button>
+          </form>}
+        </div>
     </AuthUserWrapper>
 
   );

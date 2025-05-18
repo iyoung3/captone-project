@@ -7,6 +7,7 @@ import DoctorRegisterPage from "./pages/doctor/DoctorRegisterPage";
 import DoctorHomePage from "./pages/doctor/DoctorHomePage";
 import ConsultationRequestsPage from './pages/ConsultationRequestsPage';
 import ReferralPage from './pages/ReferralPage';
+import ReferralDetailPage from "./pages/ReferralDetailPage";
 import UserChatRoomPage from "./pages/user/UserChatRoomPage";
 import DoctorChatRoomPage from "./pages/doctor/DoctorChatRoomPage";
 import SelectRolePage from "./pages/SelectRolePage";
@@ -48,6 +49,7 @@ function App() {
 
         {/* Semi public, ini buat cek detail referral */}
         <Route path="/referrals/:referralId" element={<ReferralPage />} />
+        <Route path="/referral/:referralId" element={<ReferralDetailPage />} />
       </Routes>
     </Router>
   );
