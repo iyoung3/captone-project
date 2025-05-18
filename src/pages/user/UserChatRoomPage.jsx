@@ -21,8 +21,7 @@ const UserChatRoomPage = () => {
     (async () => {
       const response = await fetchChatHistory(doctorId);
       // console.log(response);
-      const reversedArr = response.data.reverse();
-      setMessages(() => [...(response.data.reverse())]);
+      setMessages(() => [...response.data]);
     })()
   }, []);
 

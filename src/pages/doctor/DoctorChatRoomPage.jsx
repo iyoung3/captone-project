@@ -31,9 +31,8 @@ const DoctorChatRoomPage = () => {
     (async () => {
       const response = await fetchChatHistory(userId);
       // console.log(response);
-      const reversedArr = response.data.reverse();
 
-      setMessages(() => [...response.data.reverse()]);
+      setMessages(() => [...response.data]);
     })()
   }, []);
 
