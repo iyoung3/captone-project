@@ -1,15 +1,19 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import "../../styles/DoctorChatPage.css";
-import DoctorNavbar from "../../components/DoctorNavbar";
 import { AuthDoctorWrapper } from "../../components/AuthDoctorWrapper";
 import { createDoctorReferral } from "../../services/doctorService";
 import ReferralEmbed from "../../components/ReferralEmbed";
 import { fetchChatHistory } from "../../services/doctorService";
+import { getUserById } from "../../services/doctorService";
+import { useNavigate } from "react-router-dom";
+import { GoArrowLeft } from "react-icons/go";
 
 const DoctorChatRoomPage = () => {
+  const navigate = useNavigate ();
   const { userId } = useParams();
 
+  const [userName, setUserName] = useState("");
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [showReferralForm, setShowReferralForm] = useState(false);
@@ -28,13 +32,19 @@ const DoctorChatRoomPage = () => {
 
 
   useEffect(() => {
-    (async () => {
-      const response = await fetchChatHistory(userId);
-      // console.log(response);
+  (async () => {
+    const response = await fetchChatHistory(userId);
+    setMessages(() => [...response.data]);
 
-      setMessages(() => [...response.data]);
-    })()
-  }, []);
+    const userRes = await getUserById(userId);
+    if (userRes?.data?.name) {
+      setUserName(userRes.data.name);
+    } else {
+      setUserName(`User ${userId}`);
+    }
+  })()
+}, []);
+
 
   const handleSendMessage = async (e) => {
     if (!permitted) return alert('Error')
@@ -122,12 +132,10 @@ const DoctorChatRoomPage = () => {
     <AuthDoctorWrapper>
 
 
-      <div>
-        <DoctorNavbar />
         <div className="doctor-chat-page">
-          <div className="chat-title">
-            <span> Chat dengan {userId}</span>
-          </div>
+          <h1 className="chat-title">
+  <button onClick={() => navigate("/user/chat")} className="back-btn"><GoArrowLeft /></button> Chat dengan {userName || userId}
+  </h1>
           <div className="chat-box">
             {messages.map((msg) => (
               <div
@@ -135,7 +143,6 @@ const DoctorChatRoomPage = () => {
                 className={`chat-bubble ${msg.isFromDoctor ? "sent" : "received"
                   }`}
               >
-                {/*{msg.isReferral && <strong> Rujukan: </strong>}*/}
                 {msg.messageType === 'text' ?
                   <div className="chat-text">
 
@@ -200,7 +207,6 @@ const DoctorChatRoomPage = () => {
             </button>
           </form>}
         </div>
-      </div>
     </AuthDoctorWrapper>
   );
 };

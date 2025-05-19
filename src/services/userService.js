@@ -58,3 +58,15 @@ export const fetchChatHistory = async (doctorId) => {
 
     return response.json();
 }
+
+export async function getDoctorById(doctorId) {
+  try {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/doctor/${doctorId}`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch doctor:", error);
+    return null;
+  }
+}
+

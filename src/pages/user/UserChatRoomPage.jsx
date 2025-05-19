@@ -1,16 +1,18 @@
 import React, { useEffect, useState, useRef, Fragment } from "react";
 import { Link, useParams } from "react-router-dom";
 import "../../styles/UserChatPage.css";
-import UserNavbar from "../../components/UserNavbar";
 import { AuthUserWrapper } from "../../components/AuthUserWrapper";
 import ReferralEmbed from "../../components/ReferralEmbed";
 import { fetchChatHistory } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
+import { getDoctorById } from "../../services/userService";
+import { GoArrowLeft } from "react-icons/go";
 
 const UserChatRoomPage = () => {
   const navigate = useNavigate();
   const { doctorId } = useParams();
-
+  
+  const [doctorName, setDoctorName] = useState("");
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const chatEndRef = useRef(null);
@@ -18,12 +20,19 @@ const UserChatRoomPage = () => {
   const [permitted, setPermitted] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const response = await fetchChatHistory(doctorId);
-      // console.log(response);
-      setMessages(() => [...response.data]);
-    })()
-  }, []);
+  (async () => {
+    const response = await fetchChatHistory(doctorId);
+    setMessages(() => [...response.data]);
+
+    const doctorRes = await getDoctorById(doctorId);
+    if (doctorRes?.data?.name) {
+      setDoctorName(doctorRes.data.name);
+    } else {
+      setDoctorName(`Dr. ${doctorId}`);
+    }
+  })();
+}, []);
+
 
   const handleSend = async (e) => {
     if (!permitted) return alert('Error')
@@ -59,7 +68,6 @@ const UserChatRoomPage = () => {
       socket.onclose = (event) => {
         if (event.code === 4000) setPermitted(false)
         console.log("WebSocket connection closed. ");
-        // setTimeout(connectWebSocket, 1000); // Reconnect after 1 second
       };
 
       socket.onerror = (error) => {
@@ -80,17 +88,20 @@ const UserChatRoomPage = () => {
   return (
     <AuthUserWrapper>
         <div className="chat-page">
-          <h1 className="chat-title"><button onClick={() => navigate("/user/chat")} className="back-btn">⬅</button>Chat dengan Dr. {doctorId}</h1>
+<h1 className="chat-title">
+  <button onClick={() => navigate("/user/chat")} className="back-btn"><GoArrowLeft />
+</button>
+  Chat dengan {doctorName}
+</h1>
           <div className="chat-box">
             {messages.length === 0 ? (
               <div className="empty-chat">
-                <p>Belum ada percakapan. Kirim pesan pertama ke Dr. {doctorId || "Dokter"}!</p>
+                <p>Belum ada percakapan. Kirim pesan pertama ke {doctorName || "Dokter"}!</p>
               </div>
             ) : (
               messages.map((msg) => (
                 <Fragment key={msg.chatId}>
                   <div className={`chat-bubble ${!msg.isFromDoctor ? "sent" : "received"}`}>
-                    {/*{msg.isReferral && <strong>Rujukan: </strong>}*/}
                     {msg.messageType === 'referral' ?
                       <ReferralEmbed referralId={msg.message} /> :
                       <div className="chat-text">

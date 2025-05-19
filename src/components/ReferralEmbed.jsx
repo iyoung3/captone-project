@@ -30,7 +30,7 @@ function ReferralEmbed({referralId}) {
 
   return (
     <div>
-      <h2>Rujukan dari Dr. {referral.doctorId}</h2>
+      <h2>Rujukan dari Dr. {referral.doctorName}</h2>
       <p>{referral.referralReason}</p>
       <p>{new Date(referral.referralDate).toLocaleDateString()}</p>
       <p>{referral.notes}</p>

@@ -14,8 +14,7 @@ export default function DoctorNavbar() {
       <ul className="navbar-links">
         <li><Link to="/doctor/home">Beranda</Link></li>
         <li><Link to="/doctor/requests">Permintaan Konsultasi</Link></li>
-        <li><Link to="/doctor-chat/:id">Chat Pasien</Link></li>
-        <li><Link to="/doctor/referrals">Buat Rujukan</Link></li>
+        <li><Link to="/doctor/chat">Chat Pasien</Link></li>
         <li><Link to="/doctor/login" onClick={handleOnClick}>Logout</Link></li>
       </ul>
     </nav>

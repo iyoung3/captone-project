@@ -1,148 +1,122 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist&display=swap');
-
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: 'Geist', sans-serif;
-  background-color: #e5ddd5;
-}
-
 .doctor-chat-page {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  max-width: 100%;
-  margin: 0 auto;
-  background-color: #f0f0f0;
+  background: #f0f2f5;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .chat-title {
-  background-color: #075e54;
+  background-color: #0d947d;
   color: white;
-  padding: 1rem 1.5rem;
+  padding: 1rem;
   font-size: 1.2rem;
-  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .chat-box {
-  flex-grow: 1;
+  flex: 1;
   padding: 1rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;
-  background-color: #e5ddd5;
+  gap: 0.75rem;
+  background: url("https://i.imgur.com/TkPm63y.png") repeat;
+  background-size: cover;
 }
 
 .chat-bubble {
-  max-width: 70%;
-  padding: 0.7rem 1rem;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  font-size: 0.95rem;
+  max-width: 80%;
+  padding: 0.75rem 1rem;
+  border-radius: 1.2rem;
+  word-wrap: break-word;
   line-height: 1.4;
   position: relative;
-  word-wrap: break-word;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.chat-bubble.sent {
-  background-color: #dcf8c6;
+.sent {
   align-self: flex-end;
-  border-radius: 7.5px 7.5px 0 7.5px;
+  background-color: #dcf8c6;
+  border-bottom-right-radius: 0;
 }
 
-.chat-bubble.received {
-  background-color: white;
+.received {
   align-self: flex-start;
-  border-radius: 7.5px 7.5px 7.5px 0;
+  background-color: white;
+  border-bottom-left-radius: 0;
 }
 
 .chat-text {
-  white-space: pre-wrap;
+  font-size: 0.95rem;
 }
 
 .chat-input-form {
   display: flex;
   padding: 0.75rem 1rem;
-  border-top: 1px solid #ccc;
-  background-color: #f0f0f0;
+  background: white;
+  border-top: 1px solid #ddd;
+  gap: 0.5rem;
 }
 
 .chat-input-form input[type="text"] {
-  flex-grow: 1;
+  flex: 1;
   padding: 0.6rem 1rem;
-  border-radius: 20px;
+  font-size: 1rem;
+  border-radius: 25px;
   border: 1px solid #ccc;
   outline: none;
-  font-size: 0.95rem;
-  background-color: white;
+  transition: border 0.2s;
+}
+
+.chat-input-form input[type="text"]:focus {
+  border-color: #0d947d;
 }
 
 .chat-input-form .btn {
-  margin-left: 0.5rem;
-  padding: 0.6rem 1rem;
-  border-radius: 20px;
   border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-size: 1rem;
   cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: background-color 0.2s ease;
+  transition: background 0.2s;
+  color: white;
 }
 
 .btn-blue {
-  background-color: #128c7e;
-  color: white;
+  background-color: #0d947d;
 }
 
 .btn-blue:hover {
-  background-color: #075e54;
+  background-color: #0a7c68;
 }
 
 .btn-yellow {
-  background-color: #ffd600;
-  color: #333;
+  background-color: #f0ad4e;
 }
 
 .btn-yellow:hover {
-  background-color: #ffca28;
-}
-
-.referral-form {
-  background-color: #fff;
-  padding: 1rem;
-  border-top: 1px solid #ccc;
-}
-
-.referral-form h2 {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: #333;
-}
-
-.referral-form input,
-.referral-form textarea {
-  width: 100%;
-  margin-bottom: 0.5rem;
-  padding: 0.6rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 0.95rem;
-  background-color: #f9f9f9;
-}
-
-.referral-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 0.5rem;
+  background-color: #ec971f;
 }
 
 .btn-green {
-  background-color: #34b7f1;
-  color: white;
+  background-color: #5cb85c;
 }
 
 .btn-green:hover {
-  background-color: #30a5db;
+  background-color: #449d44;
 }
 
 .btn-gray {
@@ -151,14 +125,69 @@ body, html {
 }
 
 .btn-gray:hover {
-  background-color: #b0b0b0;
+  background-color: #aaa;
 }
 
-.chat-box::-webkit-scrollbar {
-  width: 6px;
+.referral-form {
+  background: white;
+  padding: 1rem;
+  border-top: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.chat-box::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.2);
-  border-radius: 4px;
+.referral-form h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #0d947d;
+}
+
+.referral-form input,
+.referral-form textarea {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.referral-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .chat-title {
+    font-size: 1rem;
+    padding: 0.75rem;
+  }
+
+  .chat-box {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .chat-bubble {
+    font-size: 0.9rem;
+    max-width: 90%;
+    padding: 0.6rem 0.9rem;
+  }
+
+  .chat-input-form {
+    flex-direction: column;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .chat-input-form input[type="text"] {
+    width: 100%;
+  }
+
+  .chat-input-form .btn {
+    width: 100%;
+  }
+
+  .referral-buttons {
+    flex-direction: column;
+  }
 }

@@ -33,3 +33,14 @@ export const fetchChatHistory = async (userId) => {
 
     return response.json();
 }
+
+export async function getUserById(userId) {
+  try {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/user/${userId}`);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch user:", error);
+    return null;
+  }
+}
