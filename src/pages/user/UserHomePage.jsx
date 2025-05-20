@@ -1,31 +1,42 @@
 import { Link } from "react-router-dom";
 import UserNavbar from "../../components/UserNavbar";
 import "../../styles/UserHomePage.css";
-import {AuthUserWrapper} from "../../components/AuthUserWrapper";
+import { AuthUserWrapper } from "../../components/AuthUserWrapper";
 import SearchDoctors from "../../components/SearchDoctors";
+import { useNavigate } from "react-router-dom";
+import { FaComments, FaStethoscope } from "react-icons/fa";
+import logo from "../../assets/iconApp.png";
 
 export default function UserHomePage() {
   return (
-      <AuthUserWrapper>
-        <div>
-          <UserNavbar />
-          <div className="user-home-container">
-            <h1 className="user-home-title">Selamat datang, Pasien!</h1>
-            <ul className="user-home-menu">
-              <li>
-                <span>Mulai Chat dengan Dokter</span>
-                <Link to="/user/chat">
-                  <button className="user-home-button">Buka Chat</button>
-                </Link>
-              </li>
-              <li>
-                <span>Cetak Rujukan Dokter</span>
-                  <button className="user-home-button">Lihat Rujukan</button>
-              </li>
-              <SearchDoctors/>
-            </ul>
-          </div>
+    <AuthUserWrapper>
+      <div className="user-home-page mobile-only">
+        <div className="user-home-logo-header">
+          <img src={logo} alt="Logo" className="app-logo" />
+          <span className="app-name">KONSUL<span className="app-name-2">DOK</span></span>
         </div>
-      </AuthUserWrapper>
+
+        <div className="user-home-header">
+          <h2>Saling Jaga Kesehatan</h2>
+          <p>Konsultasi dan Rujukan Mudah, Cepat, Aman</p>
+        </div>
+
+        <div className="user-home-menu-section">
+          <h3 className="user-home-subtitle">Mau melakukan apa hari ini?</h3>
+          <div className="user-home-menu-grid">
+            <Link to="/user/chat" className="user-home-menu-item">
+              <FaComments size={32} />
+              <span>Chat Dokter</span>
+            </Link>
+            <Link to="/user/doctor-info/:doctorId" className="user-home-menu-item">
+              <FaStethoscope size={32} />
+              <span>Cari Dokter</span>
+            </Link>
+          </div>
+          <SearchDoctors />
+        </div>
+        <UserNavbar />
+      </div>
+    </AuthUserWrapper>
   );
 }

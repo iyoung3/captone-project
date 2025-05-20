@@ -1,23 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../../src/styles/UserNavbar.css';
-import {logoutUser} from "../services/userAuthService";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { GoHome, GoSearch, GoCommentDiscussion, GoSignOut } from "react-icons/go";
+import { FaClipboardList } from "react-icons/fa";
+import { logoutUser } from "../services/userAuthService";
+import "../styles/UserNavbar.css";
 
 export default function UserNavbar() {
-  const handleOnClick = () => {
-    logoutUser()
-  }
+  const location = useLocation();
+
+  const handleLogout = () => {
+    logoutUser();
+  };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-logo">CP Telemedicine</div>
-      <ul className="navbar-links">
-        <li><Link to="/user/home">Beranda</Link></li>
-        <li><Link to="/doctors">Cari Dokter</Link></li>
-        <li><Link to="/user/chat">Chat</Link></li>
-        <li><Link to="/user/referrals">Rujukan Saya</Link></li>
-        <li><Link to="/user/login" onClick={handleOnClick}>Logout</Link></li>
-      </ul>
+    <nav className="bottom-navbar">
+      <Link to="/user/home" className={location.pathname === "/user/home" ? "active" : ""}>
+        <GoHome />
+        <span>Beranda</span>
+      </Link>
+      <Link to="/user/doctor-info/:doctorId" className={location.pathname === "/doctors" ? "active" : ""}>
+        <GoSearch />
+        <span>Dokter</span>
+      </Link>
+      <Link to="/user/chat" className={location.pathname === "/user/chat" ? "active" : ""}>
+        <GoCommentDiscussion />
+        <span>Chat</span>
+      </Link>
+      <Link to="/user/referrals" className={location.pathname === "/user/referrals" ? "active" : ""}>
+        <FaClipboardList />
+        <span>Rujukan</span>
+      </Link>
+      <Link to="/user/login" onClick={handleLogout}>
+        <GoSignOut />
+        <span>Logout</span>
+      </Link>
     </nav>
   );
 }

@@ -11,7 +11,7 @@ import { GoArrowLeft } from "react-icons/go";
 const UserChatRoomPage = () => {
   const navigate = useNavigate();
   const { doctorId } = useParams();
-  
+
   const [doctorName, setDoctorName] = useState("");
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -20,26 +20,24 @@ const UserChatRoomPage = () => {
   const [permitted, setPermitted] = useState(false);
 
   useEffect(() => {
-  (async () => {
-    const response = await fetchChatHistory(doctorId);
-    setMessages(() => [...response.data]);
+    (async () => {
+      const response = await fetchChatHistory(doctorId);
+      setMessages(() => [...response.data]);
 
-    const doctorRes = await getDoctorById(doctorId);
-    if (doctorRes?.data?.name) {
-      setDoctorName(doctorRes.data.name);
-    } else {
-      setDoctorName(`Dr. ${doctorId}`);
-    }
-  })();
-}, []);
-
+      const doctorRes = await getDoctorById(doctorId);
+      if (doctorRes?.data?.name) {
+        setDoctorName(doctorRes.data.name);
+      } else {
+        setDoctorName(`Dr. ${doctorId}`);
+      }
+    })();
+  }, []);
 
   const handleSend = async (e) => {
     if (!permitted) return alert('Error')
     e.preventDefault();
     if (!input.trim()) return;
 
-    console.log("Sending message:", input);
     const newMessage = {
       message: input,
     };
@@ -87,35 +85,37 @@ const UserChatRoomPage = () => {
 
   return (
     <AuthUserWrapper>
-        <div className="chat-page">
-<h1 className="chat-title">
-  <button onClick={() => navigate("/user/chat")} className="back-btn"><GoArrowLeft />
-</button>
-  Chat dengan {doctorName}
-</h1>
-          <div className="chat-box">
-            {messages.length === 0 ? (
-              <div className="empty-chat">
-                <p>Belum ada percakapan. Kirim pesan pertama ke {doctorName || "Dokter"}!</p>
-              </div>
-            ) : (
-              messages.map((msg) => (
-                <Fragment key={msg.chatId}>
-                  <div className={`chat-bubble ${!msg.isFromDoctor ? "sent" : "received"}`}>
-                    {msg.messageType === 'referral' ?
-                      <ReferralEmbed referralId={msg.message} /> :
-                      <div className="chat-text">
-                        {msg.message}
-                      </div>
-                    }
-                  </div>
-                </Fragment>
-              ))
-            )}
-            <div ref={chatEndRef} />
-          </div>
+      <div className="chat-page mobile-only">
+        <div className="chat-header">
+          <span className="chat-title"><button onClick={() => navigate("/user/chat")} className="back-btn">
+            <GoArrowLeft />
+          </button>Dr.{doctorName}</span>
+        </div>
 
-          {permitted && <form onSubmit={handleSend} className="chat-input-form">
+        <div className="chat-box">
+          {messages.length === 0 ? (
+            <div className="empty-chat">
+              <p>Belum ada percakapan. Kirim pesan pertama ke {doctorName || "Dokter"}!</p>
+            </div>
+          ) : (
+            messages.map((msg) => (
+              <Fragment key={msg.chatId}>
+                <div className={`chat-bubble ${!msg.isFromDoctor ? "sent" : "received"}`}>
+                  {msg.messageType === 'referral' ?
+                    <ReferralEmbed referralId={msg.message} /> :
+                    <div className="chat-text">
+                      {msg.message}
+                    </div>
+                  }
+                </div>
+              </Fragment>
+            ))
+          )}
+          <div ref={chatEndRef} />
+        </div>
+
+        {permitted && (
+          <form onSubmit={handleSend} className="chat-input-form">
             <input
               type="text"
               placeholder="Ketik pesan..."
@@ -124,10 +124,10 @@ const UserChatRoomPage = () => {
               className="chat-input"
             />
             <button type="submit" className="chat-send-btn">Kirim</button>
-          </form>}
-        </div>
+          </form>
+        )}
+      </div>
     </AuthUserWrapper>
-
   );
 };
 

@@ -1,47 +1,62 @@
 .info-doctor-container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  font-family: 'Geist', sans-serif;
+  padding: 16px;
+  padding-bottom: 80px;
+  max-width: 600px;
+  margin: auto;
 }
 
 .info-doctor-title {
-  font-size: 28px;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
+  margin-bottom: 16px;
 }
 
 .info-doctor-controls {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .search-input {
   flex: 1;
   padding: 8px;
-  margin-right: 10px;
+  font-size: 14px;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  border-radius: 6px;
 }
 
 .select-per-page {
   padding: 8px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid #ccc;
+  font-size: 14px;
 }
 
 .doctor-list {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
 .doctor-card {
-  border: 1px solid #e0e0e0;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  display: flex;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 12px;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.doctor-avatar {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.doctor-info {
+  flex: 1;
 }
 
 .doctor-name {
@@ -50,40 +65,45 @@
 }
 
 .start-consultation-btn {
-  margin-top: 10px;
-  background-color: #28a745;
+  margin-top: 8px;
+  background: linear-gradient(to right, #238d79, #00d6ee);
   color: white;
+  padding: 6px 12px;
   border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-size: 14px;
   cursor: pointer;
-}
-
-.start-consultation-btn:hover {
-  background-color: #218838;
 }
 
 .pagination-controls {
-  margin-top: 30px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  margin-top: 16px;
 }
 
 .pagination-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: none;
   background-color: #007bff;
   color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.pagination-btn:hover {
-  background-color: #0056b3;
 }
 
 .pagination-info {
-  font-weight: 500;
+  font-size: 14px;
+}
+
+.no-result {
+  margin-top: 24px;
+  font-size: 14px;
+  text-align: center;
+  color: #888;
+}
+
+@media (min-width: 768px) {
+  .info-doctor-container {
+    display: none; /* hanya mobile */
+  }
 }

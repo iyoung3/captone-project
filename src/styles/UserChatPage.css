@@ -1,140 +1,125 @@
+/* Hanya tampil di perangkat mobile */
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
+
 .chat-page {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: #f0f2f5;
-  font-family: 'Segoe UI', sans-serif;
+  background: #e6f7f4;
+  font-family: 'Geist', sans-serif;
+  position: relative;
 }
 
 .chat-title {
-  background-color: #0d947d;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to right, #238d79, #00d6ee);
   color: white;
-  padding: 1rem;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  z-index: 10;
+  height: 60px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .back-btn {
   background: none;
   border: none;
   color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
+  font-size: 1.4rem;
+  margin-right: 10px;
 }
 
 .chat-box {
   flex: 1;
-  padding: 1rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;
-  gap: 0.75rem;
-  background: url("https://i.imgur.com/TkPm63y.png") repeat;
-  background-size: cover;
+  padding: 1rem;
+  margin-bottom: 70px;
 }
 
 .chat-bubble {
-  max-width: 80%;
+  max-width: 75%;
   padding: 0.75rem 1rem;
-  border-radius: 1.2rem;
+  margin-bottom: 10px;
+  border-radius: 1rem;
   word-wrap: break-word;
-  line-height: 1.4;
-  position: relative;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   font-size: 0.95rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  line-height: 1.4;
+  transition: all 0.2s ease;
 }
 
 .sent {
   align-self: flex-end;
-  background-color: #dcf8c6;
-  border-bottom-right-radius: 0;
+  background: #8affdc; /* Hijau tosca modern */
+  color: black;
+  border-bottom-right-radius: 0.2rem;
 }
 
 .received {
   align-self: flex-start;
-  background-color: white;
-  border-bottom-left-radius: 0;
-}
-
-.chat-text {
-  font-size: 0.95rem;
-}
-
-.empty-chat {
-  text-align: center;
-  color: #777;
-  font-style: italic;
-  padding: 2rem;
+  background: #d1f0ea; /* Latar terima tosca pucat */
+  color: #0f3d3e;
+  border-bottom-left-radius: 0.2rem;
 }
 
 .chat-input-form {
-  display: flex;
-  padding: 0.75rem 1rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background: white;
-  border-top: 1px solid #ddd;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .chat-input {
   flex: 1;
   padding: 0.6rem 1rem;
+  border-radius: 2rem;
+  border: 1px solid #a2d5c6;
+  background: #f8fffd;
   font-size: 1rem;
-  border-radius: 25px;
-  border: 1px solid #ccc;
   outline: none;
-  margin-right: 0.5rem;
-  transition: border 0.2s;
+  color: #134e4a;
 }
 
-.chat-input:focus {
-  border-color: #0d947d;
+.chat-input::placeholder {
+  color: #87a7a3;
 }
 
 .chat-send-btn {
-  background-color: #0d947d;
+  background: #11998e;
   color: white;
-  border: none;
   padding: 0.6rem 1.2rem;
-  border-radius: 25px;
-  font-size: 1rem;
+  border: none;
+  border-radius: 2rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s ease;
 }
 
 .chat-send-btn:hover {
-  background-color: #0a7c68;
+  background: #0f766e;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .chat-title {
-    font-size: 1rem;
-    padding: 0.75rem;
-  }
-
-  .chat-box {
-    padding: 0.75rem 0.5rem;
-  }
-
-  .chat-bubble {
-    font-size: 0.9rem;
-    max-width: 90%;
-    padding: 0.6rem 0.9rem;
-  }
-
-  .chat-input-form {
-    padding: 0.5rem 0.75rem;
-  }
-
-  .chat-input {
-    font-size: 0.95rem;
-    padding: 0.5rem 0.9rem;
-  }
-
-  .chat-send-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.95rem;
-  }
+.empty-chat {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.95rem;
+  margin-top: 2rem;
 }

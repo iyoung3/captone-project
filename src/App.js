@@ -13,6 +13,7 @@ import DoctorChatRoomPage from "./pages/doctor/DoctorChatRoomPage";
 import SelectRolePage from "./pages/SelectRolePage";
 import UserChatListPage from "./pages/user/UserChatListPage";
 import DoctorChatListPage from "./pages/doctor/DoctorChatListPage";
+import SearchDoctors from "./components/SearchDoctors";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
         <Route path="/user/login" element={<UserLoginPage />} />
         <Route path="/user/register" element={<UserRegisterPage />} />
         <Route path="/user/home" element={<UserHomePage />} />
-        <Route path="/user/doctor-info/:doctorId" element={<></>} />
+        <Route path="/user/doctor-info/:doctorId" element={<SearchDoctors/>} />
 
         <Route path="/user/referral" element={<></>} />
 

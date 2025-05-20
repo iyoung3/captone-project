@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { GoArrowLeft } from "react-icons/go";
 
 const DoctorChatRoomPage = () => {
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
   const { userId } = useParams();
 
   const [userName, setUserName] = useState("");
@@ -32,18 +32,18 @@ const DoctorChatRoomPage = () => {
 
 
   useEffect(() => {
-  (async () => {
-    const response = await fetchChatHistory(userId);
-    setMessages(() => [...response.data]);
+    (async () => {
+      const response = await fetchChatHistory(userId);
+      setMessages(() => [...response.data]);
 
-    const userRes = await getUserById(userId);
-    if (userRes?.data?.name) {
-      setUserName(userRes.data.name);
-    } else {
-      setUserName(`User ${userId}`);
-    }
-  })()
-}, []);
+      const userRes = await getUserById(userId);
+      if (userRes?.data?.name) {
+        setUserName(userRes.data.name);
+      } else {
+        setUserName(`User ${userId}`);
+      }
+    })()
+  }, []);
 
 
   const handleSendMessage = async (e) => {
@@ -132,81 +132,81 @@ const DoctorChatRoomPage = () => {
     <AuthDoctorWrapper>
 
 
-        <div className="doctor-chat-page">
-          <h1 className="chat-title">
-  <button onClick={() => navigate("/user/chat")} className="back-btn"><GoArrowLeft /></button> Chat dengan {userName || userId}
-  </h1>
-          <div className="chat-box">
-            {messages.map((msg) => (
-              <div
-                key={msg.chatId}
-                className={`chat-bubble ${msg.isFromDoctor ? "sent" : "received"
-                  }`}
-              >
-                {msg.messageType === 'text' ?
-                  <div className="chat-text">
+      <div className="doctor-chat-page">
+        <span className="chat-title">
+          <button onClick={() => navigate("/user/chat")} className="back-btn"><GoArrowLeft /></button> Chat dengan {userName || userId}
+        </span>
+        <div className="chat-box">
+          {messages.map((msg) => (
+            <div
+              key={msg.chatId}
+              className={`chat-bubble ${msg.isFromDoctor ? "sent" : "received"
+                }`}
+            >
+              {msg.messageType === 'text' ?
+                <div className="chat-text">
 
-                    {msg.message}
-                  </div> :
-                  <ReferralEmbed referralId={msg.message} />
-                }
-              </div>
-            ))}
-            <div ref={chatEndRef} />
-          </div>
-
-          {showReferralForm ? (
-            <div className="referral-form">
-              <h2>Formulir Rujukan</h2>
-              <input
-                type="text"
-                placeholder="Alasan rujukan"
-                value={referralReason}
-                onChange={(e) => setReferralReason(e.target.value)}
-                required
-              />
-              <input
-                type="date"
-                value={referralDate}
-                onChange={(e) => setReferralDate(e.target.value)}
-              />
-              <textarea
-                placeholder="Catatan tambahan"
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                rows={3}
-              />
-              <div className="referral-buttons">
-                <button onClick={handleSendReferral} className="btn btn-green">
-                  Kirim Rujukan
-                </button>
-                <button
-                  onClick={() => setShowReferralForm(false)}
-                  className="btn btn-gray"
-                >
-                  Batal
-                </button>
-              </div>
+                  {msg.message}
+                </div> :
+                <ReferralEmbed referralId={msg.message} />
+              }
             </div>
-          ) : permitted && <form onSubmit={handleSendMessage} className="chat-input-form">
+          ))}
+          <div ref={chatEndRef} />
+        </div>
+
+        {showReferralForm ? (
+          <div className="referral-form">
+            <h2>Formulir Rujukan</h2>
             <input
               type="text"
-              placeholder="Ketik pesan..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
+              placeholder="Alasan rujukan"
+              value={referralReason}
+              onChange={(e) => setReferralReason(e.target.value)}
+              required
             />
-            <button type="submit" className="btn btn-blue">
-              Kirim
-            </button>
-            <button
-              type="button"
-              onClick={() => setShowReferralForm(true)}
-              className="btn btn-yellow"
-            >
-              Rujukan
-            </button>
-          </form>}
-        </div>
+            <input
+              type="date"
+              value={referralDate}
+              onChange={(e) => setReferralDate(e.target.value)}
+            />
+            <textarea
+              placeholder="Catatan tambahan"
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              rows={3}
+            />
+            <div className="referral-buttons">
+              <button onClick={handleSendReferral} className="btn btn-green">
+                Kirim Rujukan
+              </button>
+              <button
+                onClick={() => setShowReferralForm(false)}
+                className="btn btn-gray"
+              >
+                Batal
+              </button>
+            </div>
+          </div>
+        ) : permitted && <form onSubmit={handleSendMessage} className="chat-input-form">
+          <input
+            type="text"
+            placeholder="Ketik pesan..."
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <button type="submit" className="btn btn-blue">
+            Kirim
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowReferralForm(true)}
+            className="btn btn-yellow"
+          >
+            Rujukan
+          </button>
+        </form>}
+      </div>
     </AuthDoctorWrapper>
   );
 };

@@ -1,62 +1,107 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist&display=swap');
 
-body {
-  font-family: 'Geist', sans-serif;
-  background: linear-gradient(to right, #f0fbf8, #ffffff);
+.user-home-page.mobile-only {
+  display: block;
+  padding: 16px;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  font-family: "Geist", sans-serif;
+}
+
+@media screen and (min-width: 768px) {
+  .user-home-page.mobile-only {
+    display: none;
+  }
+}
+
+.user-home-logo-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px 0;
+}
+
+.app-logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.app-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #424242;
+}
+
+.app-name-2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.user-home-header {
+  background: linear-gradient(to right, #6dd5fa, #2193b0);
+  color: white;
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.user-home-header h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.user-home-header p {
+  font-size: 14px;
   margin: 0;
-  padding: 0;
 }
 
-.user-home-container {
-  max-width: 800px;
-  margin: 3rem auto;
-  padding: 2rem;
+.user-home-subtitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: center;
+  color: #333;
+}
+
+.user-home-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  justify-items: center;
+}
+
+.user-home-menu-item {
   background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 150, 136, 0.08);
-  border: 1px solid #cceeea;
+  border-radius: 16px;
+  padding: 16px;
+  width: 100%;
+  max-width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease-in-out;
 }
 
-.user-home-title {
-  font-size: 2rem;
-  color: #00796b;
-  margin-bottom: 2rem;
+.user-home-menu-item:hover {
+  background-color: #e6f7ff;
+  transform: translateY(-2px);
+}
+
+.user-home-menu-item span {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
   text-align: center;
 }
 
-.user-home-menu {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  gap: 1.5rem;
-}
-
-.user-home-menu li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 1.5rem;
-  border: 1px solid #b2dfdb;
-  border-radius: 12px;
-  background-color: #f9fffc;
-  transition: box-shadow 0.3s;
-}
-
-.user-home-menu li:hover {
-  box-shadow: 0 0 12px rgba(0, 150, 136, 0.1);
-}
-
-.user-home-button {
-  padding: 0.5rem 1.25rem;
-  background-color: #009688;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.user-home-button:hover {
-  background-color: #00796b;
+.user-home-menu-item > div {
+  margin-top: 8px;
+  width: 100%;
 }

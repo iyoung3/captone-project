@@ -1,22 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import '../../src/styles/DoctorNavbar.css';
-import {logoutDoctor} from "../services/doctorAuthService";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { GoHome, GoCommentDiscussion, GoSignOut } from "react-icons/go";
+import { MdRequestPage } from "react-icons/md";
+import { logoutDoctor } from "../services/doctorAuthService";
+import "../styles/DoctorNavbar.css"; // Gunakan CSS yang sama
 
 export default function DoctorNavbar() {
-  const handleOnClick = () => {
-    logoutDoctor()
-  }
+  const location = useLocation();
+
+  const handleLogout = () => {
+    logoutDoctor();
+  };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-logo">CP Telemedicine</div>
-      <ul className="navbar-links">
-        <li><Link to="/doctor/home">Beranda</Link></li>
-        <li><Link to="/doctor/requests">Permintaan Konsultasi</Link></li>
-        <li><Link to="/doctor/chat">Chat Pasien</Link></li>
-        <li><Link to="/doctor/login" onClick={handleOnClick}>Logout</Link></li>
-      </ul>
+    <nav className="bottom-navbar">
+      <Link to="/doctor/home" className={location.pathname === "/doctor/home" ? "active" : ""}>
+        <GoHome />
+        <span>Beranda</span>
+      </Link>
+      <Link to="/doctor/requests" className={location.pathname === "/doctor/requests" ? "active" : ""}>
+        <MdRequestPage />
+        <span>Permintaan</span>
+      </Link>
+      <Link to="/doctor/chat" className={location.pathname === "/doctor/chat" ? "active" : ""}>
+        <GoCommentDiscussion />
+        <span>Chat</span>
+      </Link>
+      <Link to="/doctor/login" onClick={handleLogout}>
+        <GoSignOut />
+        <span>Logout</span>
+      </Link>
     </nav>
   );
 }
