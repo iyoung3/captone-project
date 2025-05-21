@@ -6,8 +6,6 @@ import ReferralEmbed from "../../components/ReferralEmbed";
 import { fetchChatHistory } from "../../services/doctorService";
 import { getUserById } from "../../services/doctorService";
 import { useNavigate } from "react-router-dom";
-import { GoArrowLeft } from "react-icons/go";
-import {FaChevronLeft, FaPaperPlane} from "react-icons/fa";
 import {format} from "date-fns";
 import {id} from "date-fns/locale";
 import {MdArrowBackIosNew, MdAttachFile, MdOutlineAdd, MdSend} from "react-icons/md";
@@ -27,12 +25,7 @@ const DoctorChatRoomPage = () => {
 
   const [permitted, setPermitted] = useState(false);
 
-  const scrollToBottom = () => {
-    setTimeout(() => {
-      chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-  };
-
+  const [openConfirmation, setOpenConfirmation] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -89,11 +82,19 @@ const DoctorChatRoomPage = () => {
     } else {
       console.error("Failed to send referral");
     }
-
-    //   TODO: Send referral data to the server
   };
 
+  const concludeConsultation = async () => {
+    const content = {
+      message: 'Conversation ended',
+      messageType: 'conversation_end',
+    }
+
+    ws.current?.send(JSON.stringify(content));
+  }
+
   const ws = useRef(null);
+
   useEffect(() => {
     let socket;
 
@@ -133,6 +134,21 @@ const DoctorChatRoomPage = () => {
   }, []);
   return (
       <AuthDoctorWrapper>
+        {openConfirmation && <div className="bg-black/50 fixed inset-0 z-40 flex items-center justify-center">
+          <div className="bg-white p-6 space-y-4 rounded-lg">
+            <h2 className={'text-2xl font-bold'}>Apakah anda yakin?</h2>
+            <p className={'text-sm text-neutral-500'}>Jika anda mengakhiri konsultasi,<br/>anda tidak akan bisa mengirim
+              pesan lagi.</p>
+            <div className="flex">
+              <button className={'ml-auto button text-secondary'} onClick={() => {
+                setOpenConfirmation(false)
+                concludeConsultation().then(r => alert('Konsultasi telah diakhiri'))
+              }}>Ya, akhiri konsultasi</button>
+              <button className={'button bg-secondary text-white'} onClick={() => setOpenConfirmation(false)}>Tidak</button>
+            </div>
+          </div>
+        </div>}
+
         <div className="container h-screen mx-auto flex flex-col bg-white">
           <div className="bg-secondary text-white p-2 flex items-center shadow-lg">
             <button onClick={() => navigate("/doctor/home")} className="p-4">
@@ -141,6 +157,8 @@ const DoctorChatRoomPage = () => {
             <h1 className={'font-bold text-2xl capitalize'}>
               {userName}
             </h1>
+            {permitted && <button className={'ml-auto p-2 border rounded-lg'} onClick={() => setOpenConfirmation(true)}>Akhiri
+              konsultasi</button>}
           </div>
 
           <div className="flex-1 min-h-0 flex flex-col-reverse overflow-y-auto bg-pattern">

@@ -63,7 +63,13 @@ const UserChatRoomPage = () => {
 
       socket.onmessage = (event) => {
         console.log("Received message:", event.data);
-        setMessages((prevMessages) => [JSON.parse(event.data), ...prevMessages]);
+        const content = JSON.parse(event.data)
+        setMessages((prevMessages) => [content, ...prevMessages]);
+        if(content.messageType === 'conversation_end'){
+          alert('Konsultasi telah berakhir')
+          socket.close();
+          setPermitted(false)
+        }
       };
 
       socket.onclose = (event) => {
