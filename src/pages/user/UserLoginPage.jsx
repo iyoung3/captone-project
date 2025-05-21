@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/userAuthService";
 import { Link } from "react-router-dom";
 import "../../styles/UserLoginPage.css";
+import { GoArrowLeft } from "react-icons/go";
 
 export default function UserLoginPage() {
   const [email, setEmail] = useState("");
@@ -21,6 +22,9 @@ export default function UserLoginPage() {
 
   return (
     <div className="login-container">
+      <Link to="/" className="navigate-button">
+        <GoArrowLeft />
+      </Link>
       <h2>Login Pengguna</h2>
       <form onSubmit={handleSubmit} className="login-form">
         <input

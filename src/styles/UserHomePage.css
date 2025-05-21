@@ -17,8 +17,8 @@
 .user-home-logo-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 16px 0;
+  gap: 7px;
+  padding: 12px 12px 0;
 }
 
 .app-logo {
@@ -37,7 +37,14 @@
 .app-name-2 {
   font-size: 20px;
   font-weight: bold;
-  color: #007bff;
+  color: #3697ff;
+}
+
+.app-name-3 {
+  font-size: 8.5px;
+  font-weight: bold;
+  color: #393939;
+  margin-top: 1px;
 }
 
 .user-home-header {

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/userAuthService";
 import { Link } from "react-router-dom";
 import "../../styles/UserRegisterPage.css";
+import { GoArrowLeft } from "react-icons/go";
 
 export default function UserRegisterPage() {
   const [form, setForm] = useState({
@@ -36,6 +37,9 @@ export default function UserRegisterPage() {
 
   return (
     <div className="register-container">
+      <Link to="/" className="navigate-button">
+        <GoArrowLeft />
+      </Link>
       <h2>Registrasi User</h2>
       <form onSubmit={handleSubmit} className="register-form">
         <input
@@ -85,7 +89,7 @@ export default function UserRegisterPage() {
           Daftar
         </button>
         <p>Sudah punya akun?
-          <Link to="/">Login</Link>
+          <Link to="/user/login">Login</Link>
         </p>
       </form>
     </div>

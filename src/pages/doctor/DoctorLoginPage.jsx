@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../../styles/DoctorLoginPage.css"
-import {loginDoctor} from "../../services/doctorAuthService";
+import { loginDoctor } from "../../services/doctorAuthService";
+import { GoArrowLeft } from "react-icons/go";
 
 export default function DoctorLoginPage() {
   const [email, setEmail] = useState("");
@@ -21,29 +22,32 @@ export default function DoctorLoginPage() {
 
   return (
     <div className="doctor-login-container">
-  <h2>Login Dokter</h2>
-  <form onSubmit={handleSubmit} className="doctor-login-form">
-    <input
-      type="email"
-      placeholder="Email"
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      required
-    />
-    <input
-      type="password"
-      placeholder="Password"
-      value={password}
-      onChange={(e) => setPassword(e.target.value)}
-      required
-    />
-    <button type="submit" className="doctor-login-button">Login</button>
-    <p>
-      Belum punya akun?
-      <Link to='/doctor/register'>Daftar</Link>
-    </p>
-  </form>
-</div>
+      <Link to="/" className="navigate-button">
+        <GoArrowLeft />
+      </Link>
+      <h2>Login Dokter</h2>
+      <form onSubmit={handleSubmit} className="doctor-login-form">
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit" className="doctor-login-button">Login</button>
+        <p>
+          Belum punya akun?
+          <Link to='/doctor/register'>Daftar</Link>
+        </p>
+      </form>
+    </div>
 
   );
 }

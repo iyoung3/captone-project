@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/userAuthService";
 import { Link } from "react-router-dom";
 import "../../styles/DoctorRegisterPage.css"
-import {registerDoctor} from "../../services/doctorAuthService";
+import { registerDoctor } from "../../services/doctorAuthService";
+import { GoArrowLeft } from "react-icons/go";
 
 export default function DoctorRegisterPage() {
   const [form, setForm] = useState({
@@ -36,6 +37,9 @@ export default function DoctorRegisterPage() {
 
   return (
     <div className="doctor-register-container">
+      <Link to="/" className="navigate-button">
+        <GoArrowLeft />
+      </Link>
       <h2>Registrasi Dokter</h2>
       <form onSubmit={handleSubmit} className="doctor-register-form">
         <input

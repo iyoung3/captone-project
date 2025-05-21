@@ -1,43 +1,89 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
-.select-role-container {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #e8f0f8, #ffffff);
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
 }
 
-.select-role-container h2 {
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: #00897b;
-  margin-bottom: 40px;
+.select-role-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  text-align: center;
+}
+
+.select-role-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.select-role-content {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 400px;
+  background-color: rgba(0, 0, 0, 0.65);
+  padding: 30px 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.select-role-content h2 {
+  font-size: 24px;
+  color: #00e5ff;
+  margin-bottom: 25px;
 }
 
 .select-role-buttons {
   display: flex;
-  gap: 30px;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.select-role-buttons button {
-  padding: 0.75rem;
-  background-color: #00897b;
-  color: white;
+.select-role-button {
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
-  border-radius: 12px;
-  padding: 15px 30px;
-  font-size: 1.5rem;
-  font-weight: 500;
+  border-radius: 25px;
   cursor: pointer;
   transition: all 0.3s ease;
-  transition: background-color 0.3s;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-.select-role-buttons button:hover {
+.select-role-button.doctor {
+  background-color: #00bcd4;
+  color: white;
+}
+
+.select-role-button.pasien {
   background-color: #00796b;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 24px rgba(0, 51, 37, 0.3);
+  color: white;
+}
+
+.select-role-button:hover {
+  transform: scale(1.05);
+  opacity: 0.95;
+}
+
+@media (max-width: 480px) {
+  .select-role-content h2 {
+    font-size: 20px;
+  }
+
+  .select-role-button {
+    font-size: 15px;
+    padding: 13px;
+  }
 }

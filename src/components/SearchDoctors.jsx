@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/InfoDoctorPage.css";
 import { fetchDoctors, initiateConsultation } from "../services/userService";
 import defaultAvatar from "../assets/doctor-avatar.png";
+import UserNavbar from "./UserNavbar";
 
 export default function SearchDoctors() {
   const [page, setPage] = useState(1);
@@ -45,7 +46,8 @@ export default function SearchDoctors() {
   };
 
   return (
-    <div className="info-doctor-container">
+    <div>
+<div className="info-doctor-container">
       <h1 className="info-doctor-title">Cari Dokter</h1>
 
       <div className="info-doctor-controls">
@@ -121,5 +123,8 @@ export default function SearchDoctors() {
         <p className="no-result">Tidak ditemukan dokter yang sesuai.</p>
       )}
     </div>
+    <UserNavbar/>
+    </div>
+    
   );
 }

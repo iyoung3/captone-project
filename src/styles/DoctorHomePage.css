@@ -1,41 +1,63 @@
+body {
+  background-color: #e0f7fa;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
 .doctor-home-container {
-  padding: 40px;
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  padding: 20px;
+  max-width: 100%;
 }
 
 .doctor-home-title {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 24px;
-  color: #333;
+  font-size: 24px;
+  color: #004d40;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .doctor-home-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .doctor-home-item {
-  background-color: #ffffff;
-  padding: 16px 20px;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  font-size: 18px;
-  color: #444;
-  transition: background-color 0.2s ease;
-  cursor: pointer;
-  border: 1px solid #ddd;
+  background-color: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .doctor-home-item:hover {
-  background-color: #e6f0ff;
+  background-color: #00bcd4;
+  transform: scale(1.05);
+}
+
+.doctor-home-item-icon {
+  color: #00796b;
+  margin-right: 15px;
+}
+
+@media (max-width: 768px) {
+  .doctor-home-list {
+    padding: 0;
+  }
+
+  .doctor-home-item {
+    padding: 12px 10px;
+    font-size: 16px;
+  }
+
+  .doctor-home-title {
+    font-size: 20px;
+  }
 }

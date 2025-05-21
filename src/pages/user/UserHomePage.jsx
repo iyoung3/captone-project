@@ -5,15 +5,19 @@ import { AuthUserWrapper } from "../../components/AuthUserWrapper";
 import SearchDoctors from "../../components/SearchDoctors";
 import { useNavigate } from "react-router-dom";
 import { FaComments, FaStethoscope } from "react-icons/fa";
-import logo from "../../assets/iconApp.png";
+import logo from "../../assets/iconAppT.png";
 
 export default function UserHomePage() {
   return (
     <AuthUserWrapper>
+      <div>
+        
+      </div>
       <div className="user-home-page mobile-only">
         <div className="user-home-logo-header">
           <img src={logo} alt="Logo" className="app-logo" />
-          <span className="app-name">KONSUL<span className="app-name-2">DOK</span></span>
+          <h2 className="app-name">KONSUL<span className="app-name-2">DOK</span><p className="app-name-3">konsultasikan Kepada Dokter</p></h2>
+          
         </div>
 
         <div className="user-home-header">
