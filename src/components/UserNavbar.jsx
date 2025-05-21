@@ -12,26 +12,26 @@ export default function UserNavbar() {
   };
 
   return (
-    <nav className="bottom-navbar">
-      <Link to="/user/home" className={location.pathname === "/user/home" ? "active" : ""}>
+    <nav className="fixed bottom-0 container w-full left-1/2 -translate-x-1/2 flex justify-evenly bg-white py-4 border-t pb-4">
+      <Link to="/user/home" className={`flex flex-col items-center`}>
         <GoHome />
-        <span>Beranda</span>
+        <span className={'text-xs'}>Beranda</span>
       </Link>
-      <Link to="/user/doctor-info/:doctorId" className={location.pathname === "/doctors" ? "active" : ""}>
+      <Link to="/user/doctor-info/:doctorId" className={`flex flex-col items-center`}>
         <GoSearch />
-        <span>Dokter</span>
+        <span className={'text-xs'}>Dokter</span>
       </Link>
-      <Link to="/user/chat" className={location.pathname === "/user/chat" ? "active" : ""}>
+      <Link to="/user/chat" className={`flex flex-col items-center`}>
         <GoCommentDiscussion />
-        <span>Chat</span>
+        <span className={'text-xs'}>Chat</span>
       </Link>
-      <Link to="/user/referrals" className={location.pathname === "/user/referrals" ? "active" : ""}>
+      <Link to="/user/referrals" className={`flex flex-col items-center`}>
         <FaClipboardList />
-        <span>Rujukan</span>
+        <span className={'text-xs'}>Rujukan</span>
       </Link>
-      <Link to="/user/login" onClick={handleLogout}>
+      <Link to="/user/login" onClick={handleLogout} className={' flex flex-col items-center'}>
         <GoSignOut />
-        <span>Logout</span>
+        <span className={'text-xs'}>Logout</span>
       </Link>
     </nav>
   );

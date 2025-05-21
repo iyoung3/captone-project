@@ -34,59 +34,67 @@ export default function UserRegisterPage() {
   };
 
   return (
-    <div className="register-container">
-      <h2>Registrasi User</h2>
-      <form onSubmit={handleSubmit} className="register-form">
-        <input
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          placeholder="Nama"
-          required
-        />
-        <input
-          name="email"
-          type="email"
-          value={form.email}
-          onChange={handleChange}
-          placeholder="Email"
-          required
-        />
-        <input
-          name="password"
-          type="password"
-          value={form.password}
-          onChange={handleChange}
-          placeholder="Password"
-          required
-        />
-        <input
-          name="phoneNumber"
-          value={form.phoneNumber}
-          onChange={handleChange}
-          placeholder="Nomor Telepon"
-          required
-        />
-        <input
-          name="address"
-          value={form.address}
-          onChange={handleChange}
-          placeholder="Alamat"
-        />
-        <input
-          name="dateOfBirth"
-          type="date"
-          value={form.dateOfBirth}
-          onChange={handleChange}
-          placeholder="Tanggal Lahir"
-        />
-        <button type="submit" className="register-button">
-          Daftar
-        </button>
-        <p>Sudah punya akun?
-          <Link to="/">Login</Link>
-        </p>
-      </form>
-    </div>
+
+      <div className="container mx-auto min-h-screen flex flex-col items-center px-16">
+
+        <h1 className={'text-5xl text-left w-full mt-8 mb-16 text-primary px-6 font-bold'}>Registrasi</h1>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-8 w-full">
+          <input
+              className={'input'}
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="Nama"
+              required
+          />
+          <input
+              className={'input'}
+              name="email"
+              type="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Email"
+              required
+          />
+          <input
+              className={'input'}
+              name="password"
+              type="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Password"
+              required
+          />
+          <input
+              className={'input'}
+              name="phoneNumber"
+              value={form.phoneNumber}
+              onChange={handleChange}
+              placeholder="Nomor Telepon"
+              required
+          />
+          <input
+              className={'input'}
+              name="address"
+              value={form.address}
+              onChange={handleChange}
+              placeholder="Alamat"
+          />
+          <input
+              className={'input'}
+              name="dateOfBirth"
+              type="date"
+              value={form.dateOfBirth}
+              onChange={handleChange}
+              placeholder="Tanggal Lahir"
+          />
+          <button type="submit" className="button bg-primary text-white">
+            Daftar
+          </button>
+          <p className={'text-center text-xs'}>Sudah punya akun?
+            <Link className={'text-primary'} to="/user/login"> Login</Link>
+          </p>
+        </form>
+      </div>
   );
 }

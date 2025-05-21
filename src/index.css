@@ -1,17 +1,68 @@
-@import url("https://unpkg.com/@geist/font/style.css");
+@font-face {
+  font-family: 'DIN';
+  src: url('./assets/fonts/DINBold.woff2') format('woff2'),
+  url('./assets/fonts/DINBold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
 
-@import "tailwindcss";
+@font-face {
+  font-family: 'DIN';
+  src: url('./assets/fonts/DIN-Black.woff2') format('woff2'),
+  url('./assets/fonts/DIN-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DIN';
+  src: url('./assets/fonts/DIN.woff2') format('woff2'),
+  url('./assets/fonts/DIN.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DIN';
+  src: url('./assets/fonts/DIN-Medium.woff2') format('woff2'),
+  url('./assets/fonts/DIN-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
-  font-family: 'Geist', sans-serif;
+  font-family: 'DIN', sans-serif;
 }
 
-
-.mobile-only{
-  max-width: 768px;
-  margin: 0 auto;
-  background: white;
-  min-height: 100vh;
-  padding: 0 1rem;
+.container{
+  @apply bg-white;
 }
 
+body{
+  @apply bg-neutral-100;
+}
+
+.input{
+  @apply p-4 border border-gray-200 rounded-md text-sm leading-tight;
+}
+
+.button{
+  @apply p-3 rounded-md text-sm leading-tight font-bold;
+}
+
+.bg-pattern{
+  background: radial-gradient(circle, #f0ead0 10%, transparent 11%),radial-gradient(circle at bottom left, #f0ead0 5%, transparent 6%),radial-gradient(circle at bottom right, #f0ead0 5%, transparent 6%),radial-gradient(circle at top left, #f0ead0 5%, transparent 6%),radial-gradient(circle at top right, #f0ead0 5%, transparent 6%);
+  background-size: 1em 1em;
+  opacity: 1
+}

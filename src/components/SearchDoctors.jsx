@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchDoctors, initiateConsultation } from "../services/userService";
 import defaultAvatar from "../assets/doctor-avatar.png";
+import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
 
 export default function SearchDoctors() {
   const [page, setPage] = useState(1);
-  const [perPage, setPerPage] = useState(10);
+  const [perPage, setPerPage] = useState(20);
   const [doctors, setDoctors] = useState([]);
   const [total, setTotal] = useState(1);
-  const [search, setSearch] = useState("");
+  const [specialization, setSpecialization] = useState("");
   const navigate = useNavigate();
 
   const totalPage = Math.ceil(total / perPage);
@@ -16,12 +17,7 @@ export default function SearchDoctors() {
   useEffect(() => {
     const searchDoctors = async () => {
       try {
-        if (search.trim() === "") {
-          setDoctors([]);
-          return;
-        }
-
-        const data = await fetchDoctors({ page, perPage, search });
+        const data = await fetchDoctors({ page, perPage, specialization });
         setDoctors(data.data);
         setTotal(data.total);
       } catch (error) {
@@ -31,7 +27,7 @@ export default function SearchDoctors() {
     };
 
     searchDoctors();
-  }, [page, perPage, search]);
+  }, [page, perPage, specialization]);
 
   const handleOnClick = async (doctorId) => {
     try {
@@ -44,79 +40,83 @@ export default function SearchDoctors() {
   };
 
   return (
-    <div className="info-doctor-container mobile-only">
-      <h1 className="info-doctor-title">Cari Dokter</h1>
+    <div className="w-full pb-16">
+      <h1 className="text-2xl mt-8">Cari Dokter</h1>
 
-      <div className="info-doctor-controls">
-        <input
-          type="text"
-          placeholder="Cari nama atau spesialisasi..."
-          value={search}
+      <select
+          value={specialization}
           onChange={(e) => {
             setPage(1);
-            setSearch(e.target.value);
+            setSpecialization(e.target.value);
           }}
-          className="search-input"
-        />
-        <select
-          value={perPage}
-          onChange={(e) => setPerPage(Number(e.target.value))}
-          className="select-per-page"
-        >
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={15}>15</option>
-        </select>
-      </div>
+          className="input w-full my-4 bg-white"
+      >
 
-      {search.trim() !== "" && doctors.length > 0 && (
-        <>
-          <div className="doctor-list">
-            {doctors.map((doctor) => (
-              <div key={doctor.doctorId} className="doctor-card">
-                <img
-                  src={defaultAvatar}
-                  alt="avatar"
-                  className="doctor-avatar"
-                />
-                <div className="doctor-info">
-                  <p className="doctor-name">{doctor.name}</p>
-                  <p>Spesialis: {doctor.specialization}</p>
-                  <p>Rumah Sakit: {doctor.hospitalAffiliation}</p>
-                  <button
-                    onClick={() => handleOnClick(doctor.doctorId)}
-                    className="start-consultation-btn"
-                  >
-                    Mulai Konsultasi
-                  </button>
+        <option value="">Pilih Spesialisasi</option>
+        <option value="DERMATOLOGY">DERMATOLOGY</option>
+        <option value="CARDIOLOGY">CARDIOLOGY</option>
+        <option value="NEUROLOGY">NEUROLOGY</option>
+        <option value="PEDIATRICS">PEDIATRICS</option>
+        <option value="PSYCHIATRY">PSYCHIATRY</option>
+        <option value="ORTHOPEDICS">ORTHOPEDICS</option>
+        <option value="GYNECOLOGY">GYNECOLOGY</option>
+        <option value="OPHTHALMOLOGY">OPHTHALMOLOGY</option>
+        <option value="RADIOLOGY">RADIOLOGY</option>
+        <option value="ANESTHESIOLOGY">ANESTHESIOLOGY</option>
+
+      </select>
+
+      {doctors.length > 0 && (
+          <>
+            <div className="flex flex-col gap-6">
+              {doctors.map((doctor) => (
+                  <div key={doctor.doctorId} className="doctor-card shadow p-6 flex relative">
+                    <div className="w-1/4">
+
+                      <img
+                          src={defaultAvatar}
+                          alt="avatar"
+                          className="w-full aspect-square"
+                      />
+                    </div>
+                    <div className="pl-4 flex flex-col flex-1 min-w-0">
+                      <p className="font-bold capitalize truncate">{doctor.name}</p>
+                      <p className={'text-neutral-800 capitalize'}>Spesialis: {doctor.specialization}</p>
+                  <p className={'text-xs text-neutral-500'}>Rumah Sakit: {doctor.hospitalAffiliation}</p>
                 </div>
+                <button
+                  onClick={() => handleOnClick(doctor.doctorId)}
+                  className="text-primary font-bold mt-6 ml-auto absolute bottom-4 right-4"
+                >
+                  Mulai Konsultasi
+                </button>
               </div>
             ))}
           </div>
 
-          <div className="pagination-controls">
+          <div className="flex justify-evenly my-8 items-center">
             <button
               onClick={() => setPage(page > 1 ? page - 1 : 1)}
-              className="pagination-btn"
+              className={`${page > 1?'bg-primary rounded-lg text-white':'opacity-0 cursor-default'} p-4`}
             >
-              Previous
+              <FaChevronLeft />
             </button>
-            <span className="pagination-info">
+            <span className="text-neutral-500">
               Halaman {page} dari {totalPage}
             </span>
             <button
               onClick={() =>
                 setPage(page < totalPage ? page + 1 : totalPage)
               }
-              className="pagination-btn"
+              className={`${page < totalPage?'bg-primary rounded-lg text-white':'opacity-0 cursor-default'} p-4`}
             >
-              Next
+              <FaChevronRight />
             </button>
           </div>
         </>
       )}
 
-      {search.trim() !== "" && doctors.length === 0 && (
+      {specialization.trim() !== "" && doctors.length === 0 && (
         <p className="no-result">Tidak ditemukan dokter yang sesuai.</p>
       )}
     </div>

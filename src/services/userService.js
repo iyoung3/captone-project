@@ -1,7 +1,10 @@
 import $API from "./api";
 
-export const fetchDoctors = async ({page,perPage}) => {
-  const response = await $API(`/user/search-doctors?page=${page}&perPage=${perPage}`);
+export const fetchDoctors = async ({page,perPage, specialization}) => {
+
+  const filter = specialization ? `&specialization=${specialization}` : '';
+
+  const response = await $API(`/user/search-doctors?page=${page}&perPage=${perPage}${filter}`);
 
   if(!response.ok) {
     throw new Error("Failed to fetch doctors");
