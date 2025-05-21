@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import UserNavbar from "../../components/UserNavbar";
-import "../../styles/UserChatListPage.css";
 import { AuthUserWrapper } from "../../components/AuthUserWrapper";
 import { useEffect, useState } from "react";
 import { getChats } from "../../services/userService";
@@ -21,8 +20,8 @@ export default function UserChatListPage() {
 
   return (
     <AuthUserWrapper>
+      <UserNavbar />
       <div className="chat-list-page">
-        <UserNavbar />
         <div className="chat-list-container">
           <h2 className="chat-list-title">Chat dengan Dokter</h2>
           {chats.length === 0 ? (

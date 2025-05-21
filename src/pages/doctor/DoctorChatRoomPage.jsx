@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import "../../styles/DoctorChatPage.css";
 import { AuthDoctorWrapper } from "../../components/AuthDoctorWrapper";
 import { createDoctorReferral } from "../../services/doctorService";
 import ReferralEmbed from "../../components/ReferralEmbed";

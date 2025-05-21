@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import '../../src/styles/ConsultationRequestsPage.css';
 import DoctorNavbar from '../components/DoctorNavbar';
 
 export default function ConsultationRequestsPage() {

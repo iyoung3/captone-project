@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../../src/styles/ReferralPage.css';
 import DoctorNavbar from '../components/DoctorNavbar';
 
 export default function ReferralPage() {

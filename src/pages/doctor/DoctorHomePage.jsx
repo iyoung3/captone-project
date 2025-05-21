@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/DoctorHomePage.css";
 import DoctorNavbar from "../../components/DoctorNavbar";
 import {AuthDoctorWrapper} from "../../components/AuthDoctorWrapper";
 

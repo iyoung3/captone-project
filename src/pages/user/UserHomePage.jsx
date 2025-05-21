@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import UserNavbar from "../../components/UserNavbar";
-import "../../styles/UserHomePage.css";
 import { AuthUserWrapper } from "../../components/AuthUserWrapper";
 import SearchDoctors from "../../components/SearchDoctors";
-import { useNavigate } from "react-router-dom";
 import { FaComments, FaStethoscope } from "react-icons/fa";
 import logo from "../../assets/iconApp.png";
 
@@ -35,8 +33,8 @@ export default function UserHomePage() {
           </div>
           <SearchDoctors />
         </div>
-        <UserNavbar />
       </div>
+      <UserNavbar />
     </AuthUserWrapper>
   );
 }

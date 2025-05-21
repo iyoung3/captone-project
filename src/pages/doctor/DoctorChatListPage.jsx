@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import "../../styles/DoctorChatList.css";
 import { useEffect, useState } from "react";
 import { getChats } from "../../services/doctorService";
 import { AuthDoctorWrapper } from "../../components/AuthDoctorWrapper";

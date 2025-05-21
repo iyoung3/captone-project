@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { GoHome, GoSearch, GoCommentDiscussion, GoSignOut } from "react-icons/go";
 import { FaClipboardList } from "react-icons/fa";
 import { logoutUser } from "../services/userAuthService";
-import "../styles/UserNavbar.css";
 
 export default function UserNavbar() {
   const location = useLocation();

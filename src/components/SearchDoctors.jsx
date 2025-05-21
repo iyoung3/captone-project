@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/InfoDoctorPage.css";
 import { fetchDoctors, initiateConsultation } from "../services/userService";
 import defaultAvatar from "../assets/doctor-avatar.png";
 
@@ -45,7 +44,7 @@ export default function SearchDoctors() {
   };
 
   return (
-    <div className="info-doctor-container">
+    <div className="info-doctor-container mobile-only">
       <h1 className="info-doctor-title">Cari Dokter</h1>
 
       <div className="info-doctor-controls">

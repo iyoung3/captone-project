@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/userAuthService";
 import { Link } from "react-router-dom";
-import "../../styles/UserLoginPage.css";
 
 export default function UserLoginPage() {
   const [email, setEmail] = useState("");

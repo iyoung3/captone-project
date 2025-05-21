@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import "../../styles/DoctorLoginPage.css"
 import {loginDoctor} from "../../services/doctorAuthService";
 
 export default function DoctorLoginPage() {

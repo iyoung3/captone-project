@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, Fragment } from "react";
 import { Link, useParams } from "react-router-dom";
-import "../../styles/UserChatPage.css";
 import { AuthUserWrapper } from "../../components/AuthUserWrapper";
 import ReferralEmbed from "../../components/ReferralEmbed";
 import { fetchChatHistory } from "../../services/userService";

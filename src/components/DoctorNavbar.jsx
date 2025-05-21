@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { GoHome, GoCommentDiscussion, GoSignOut } from "react-icons/go";
 import { MdRequestPage } from "react-icons/md";
 import { logoutDoctor } from "../services/doctorAuthService";
-import "../styles/DoctorNavbar.css"; // Gunakan CSS yang sama
 
 export default function DoctorNavbar() {
   const location = useLocation();

@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { getReferral } from "../services/userService";
 import { QRCodeCanvas } from 'qrcode.react';
-import "../styles/ReferralDetail.css";
 
 export default function ReferralDetailPage() {
   const { referralId } = useParams();
