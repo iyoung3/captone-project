@@ -78,6 +78,11 @@ const DoctorChatRoomPage = () => {
         messageType: "referral",
       }
 
+      setReferralDate("")
+      setReferralDate("")
+      setReferralReason("")
+      setNotes("")
+      setShowReferralForm(false);
       ws.current?.send(JSON.stringify(content));
     } else {
       console.error("Failed to send referral");

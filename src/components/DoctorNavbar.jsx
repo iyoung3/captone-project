@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { GoHome, GoCommentDiscussion, GoSignOut } from "react-icons/go";
 import { logoutDoctor } from "../services/doctorAuthService";
-import {MdChat, MdHomeFilled, MdLogout} from "react-icons/md";
+import {MdChat, MdDocumentScanner, MdHomeFilled, MdLogout} from "react-icons/md";
 
 export default function DoctorNavbar() {
   const location = useLocation();
@@ -17,6 +17,11 @@ export default function DoctorNavbar() {
         <MdHomeFilled size={24}/>
         <span className={'text-xs'}>Beranda</span>
       </Link>
+
+        <Link to="/doctor/referrals" className={`flex flex-col items-center`}>
+            <MdDocumentScanner  size={24}/>
+            <span className={'text-xs'}>Rujukan</span>
+        </Link>
       <Link to="/doctor/login" className={'flex flex-col items-center'} onClick={handleLogout}>
         <MdLogout size={24}/>
         <span className={'text-xs'}>Logout</span>

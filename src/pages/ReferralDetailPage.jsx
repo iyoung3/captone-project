@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { getReferral } from "../services/userService";
+import { getReferralById } from "../services/userService";
 import { QRCodeCanvas } from 'qrcode.react';
 import {format} from "date-fns";
 import {id} from "date-fns/locale";
@@ -14,7 +14,7 @@ export default function ReferralDetailPage() {
   useEffect(() => {
     const fetchReferral = async () => {
       try {
-        const response = await getReferral(referralId);
+        const response = await getReferralById(referralId);
         if (response) {
           setReferral(response.data);
         } else {

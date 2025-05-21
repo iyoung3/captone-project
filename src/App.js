@@ -6,7 +6,7 @@ import DoctorLoginPage from "./pages/doctor/DoctorLoginPage";
 import DoctorRegisterPage from "./pages/doctor/DoctorRegisterPage";
 import DoctorHomePage from "./pages/doctor/DoctorHomePage";
 import ConsultationRequestsPage from './pages/ConsultationRequestsPage';
-import ReferralPage from './pages/ReferralPage';
+import ReferralsPage from './pages/ReferralsPage';
 import ReferralDetailPage from "./pages/ReferralDetailPage";
 import UserChatRoomPage from "./pages/user/UserChatRoomPage";
 import DoctorChatRoomPage from "./pages/doctor/DoctorChatRoomPage";
@@ -31,6 +31,7 @@ function App() {
 
         {/* Isi list2 chat */}
         <Route path="/user/chat" element={<UserChatListPage/>} />
+        <Route path="/user/referrals" element={<ReferralsPage/>} />
 
 
         {/* dokter */}
@@ -40,6 +41,8 @@ function App() {
 
         {/* Isi room chat kayak dm */}
         <Route path="/doctor/chat/:userId" element={<DoctorChatRoomPage />} />
+
+        <Route path="/doctor/referrals" element={<ReferralsPage isDoctor/>} />
 
         {/* Semi public, ini buat cek detail referral */}
         <Route path="/referral/:referralId" element={<ReferralDetailPage />} />

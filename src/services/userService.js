@@ -36,8 +36,18 @@ export const getChats = async () => {
   return response.json();
 };
 
-export const getReferral = async (referralId) => {
+export const getReferralById = async (referralId) => {
   const response = await $API(`/referral/${referralId}`);
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch referral");
+  }
+
+  return response.json();
+}
+
+export const getReferrals = async () => {
+  const response = await $API(`/referral`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch referral");

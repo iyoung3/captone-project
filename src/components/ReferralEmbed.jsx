@@ -1,5 +1,5 @@
 import {memo, useEffect, useState} from "react";
-import {getReferral} from "../services/userService";
+import {getReferralById} from "../services/userService";
 import {Link} from "react-router-dom";
 
 function ReferralEmbed({referralId}) {
@@ -8,7 +8,7 @@ function ReferralEmbed({referralId}) {
 
   useEffect(() => {
     const fetchReferral = async () => {
-        const response = await getReferral(referralId);
+        const response = await getReferralById(referralId);
 
         if (response) {
           setReferral(response.data);
