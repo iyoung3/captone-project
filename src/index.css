@@ -45,10 +45,6 @@
   font-family: 'DIN', sans-serif;
 }
 
-.container{
-  @apply bg-white;
-}
-
 body{
   @apply bg-neutral-100;
 }

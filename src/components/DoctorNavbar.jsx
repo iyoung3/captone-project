@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { GoHome, GoCommentDiscussion, GoSignOut } from "react-icons/go";
-import { MdRequestPage } from "react-icons/md";
 import { logoutDoctor } from "../services/doctorAuthService";
+import {MdChat, MdHomeFilled, MdLogout} from "react-icons/md";
 
 export default function DoctorNavbar() {
   const location = useLocation();
@@ -12,22 +12,14 @@ export default function DoctorNavbar() {
   };
 
   return (
-    <nav className="bottom-navbar">
-      <Link to="/doctor/home" className={location.pathname === "/doctor/home" ? "active" : ""}>
-        <GoHome />
-        <span>Beranda</span>
+    <nav className="fixed bottom-0 container w-full left-1/2 -translate-x-1/2 flex justify-evenly py-4 pb-4 bg-secondary text-white">
+      <Link to="/doctor/home" className={'flex flex-col items-center'}>
+        <MdHomeFilled size={24}/>
+        <span className={'text-xs'}>Beranda</span>
       </Link>
-      <Link to="/doctor/requests" className={location.pathname === "/doctor/requests" ? "active" : ""}>
-        <MdRequestPage />
-        <span>Permintaan</span>
-      </Link>
-      <Link to="/doctor/chat" className={location.pathname === "/doctor/chat" ? "active" : ""}>
-        <GoCommentDiscussion />
-        <span>Chat</span>
-      </Link>
-      <Link to="/doctor/login" onClick={handleLogout}>
-        <GoSignOut />
-        <span>Logout</span>
+      <Link to="/doctor/login" className={'flex flex-col items-center'} onClick={handleLogout}>
+        <MdLogout size={24}/>
+        <span className={'text-xs'}>Logout</span>
       </Link>
     </nav>
   );

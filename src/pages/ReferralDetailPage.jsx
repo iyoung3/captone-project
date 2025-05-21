@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { getReferral } from "../services/userService";
 import { QRCodeCanvas } from 'qrcode.react';
+import {format} from "date-fns";
+import {id} from "date-fns/locale";
 
 export default function ReferralDetailPage() {
   const { referralId } = useParams();
@@ -43,23 +45,23 @@ export default function ReferralDetailPage() {
   if (!referral) return <p>Data rujukan tidak tersedia.</p>;
 
   return (
-    <div className="referral-container">
-      <div className="referral-card" ref={printRef}>
-        <h2>Detail Rujukan</h2>
-        <QRCodeCanvas value={window.location.href} size={100} className="qr-code" />
+    <div className="container mx-auto bg-white px-12 min-h-screen pt-12">
+      <div className="flex flex-col items-center gap-4" ref={printRef}>
+        <h2 className={'text-4xl font-bold mb-12'}>Detail Rujukan</h2>
+        <QRCodeCanvas value={window.location.href} size={200} className="qr-code" />
 
-        <div className="referral-detail">
+        <div className="referral-detail space-y-2 my-12">
           <p><strong>ID Rujukan:</strong> {referral.referralId}</p>
-          <p><strong>Tanggal Dibuat:</strong> {new Date(referral.createdAt).toLocaleDateString()}</p>
-          <p><strong>Dokter Perujuk:</strong> {referral.doctorName}</p>
-          <p><strong>Nama Pasien:</strong> {referral.patientName}</p>
+          <p><strong>Tanggal Dibuat:</strong> {format(new Date(referral.createdAt), 'EEEE, dd MMMM yyyy HH:mm', {locale:id})}</p>
+          <p className={'capitalize'}><strong>Dokter Perujuk:</strong> Dr. {referral.doctorName}</p>
+          <p className={'capitalize'}><strong>Nama Pasien:</strong> {referral.userName}</p>
           <p><strong>Alasan Rujukan:</strong> {referral.referralReason}</p>
-          <p><strong>Tanggal Rujukan:</strong> {new Date(referral.referralDate).toLocaleDateString()}</p>
+          <p><strong>Tanggal Rujukan:</strong> {format(new Date(referral.referralDate), 'EEEE, dd MMMM yyyy', {locale:id})}</p>
           <p><strong>Catatan Tambahan:</strong> {referral.notes}</p>
         </div>
       </div>
 
-      <button className="print-button" onClick={handlePrint}>Cetak Rujukan</button>
+      <button className="button w-full bg-primary text-white" onClick={handlePrint}>Cetak Rujukan</button>
     </div>
   );
 }

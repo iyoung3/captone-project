@@ -25,9 +25,6 @@ function App() {
         <Route path="/user/login" element={<UserLoginPage />} />
         <Route path="/user/register" element={<UserRegisterPage />} />
         <Route path="/user/home" element={<UserHomePage />} />
-        <Route path="/user/doctor-info/:doctorId" element={<SearchDoctors/>} />
-
-        <Route path="/user/referral" element={<></>} />
 
         {/* Isi room chat kayak dm */}
         <Route path="/user/chat/:doctorId" element={<UserChatRoomPage />} />
@@ -40,16 +37,11 @@ function App() {
         <Route path="/doctor/login" element={<DoctorLoginPage />} />
         <Route path="/doctor/register" element={<DoctorRegisterPage />} />
         <Route path="/doctor/home" element={<DoctorHomePage />} />
-        <Route path="/doctor/requests" element={<ConsultationRequestsPage />} />
 
         {/* Isi room chat kayak dm */}
         <Route path="/doctor/chat/:userId" element={<DoctorChatRoomPage />} />
 
-        {/* Isi list2 chat */}
-        <Route path="/doctor/chat" element={<DoctorChatListPage />} />
-
         {/* Semi public, ini buat cek detail referral */}
-        <Route path="/referrals/:referralId" element={<ReferralPage />} />
         <Route path="/referral/:referralId" element={<ReferralDetailPage />} />
       </Routes>
     </Router>

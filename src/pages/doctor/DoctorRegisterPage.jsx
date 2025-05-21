@@ -33,10 +33,12 @@ export default function DoctorRegisterPage() {
   };
 
   return (
-    <div className="doctor-register-container">
-      <h2>Registrasi Dokter</h2>
-      <form onSubmit={handleSubmit} className="doctor-register-form">
+    <div className="container mx-auto min-h-screen flex flex-col items-center px-16">
+      <h2 className={'text-5xl text-left w-full mt-8 text-secondary px-6 font-bold'}>Daftar</h2>
+      <p className={'text-left text-sm mb-16 w-full px-6 text-neutral-500'}>Sebagai dokter</p>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-8 w-full">
         <input
+            className={'input'}
           name="name"
           value={form.name}
           onChange={handleChange}
@@ -44,6 +46,7 @@ export default function DoctorRegisterPage() {
           required
         />
         <input
+            className={'input'}
           name="email"
           type="email"
           value={form.email}
@@ -52,6 +55,7 @@ export default function DoctorRegisterPage() {
           required
         />
         <input
+            className={'input'}
           name="password"
           type="password"
           value={form.password}
@@ -60,6 +64,7 @@ export default function DoctorRegisterPage() {
           required
         />
         <input
+            className={'input'}
           name="phoneNumber"
           value={form.phoneNumber}
           onChange={handleChange}
@@ -67,6 +72,7 @@ export default function DoctorRegisterPage() {
           required
         />
         <input
+            className={'input'}
           name="hospitalAffiliation"
           value={form.hospitalAffiliation}
           onChange={handleChange}
@@ -77,6 +83,7 @@ export default function DoctorRegisterPage() {
           value={form.specialization}
           onChange={handleChange}
           required
+          className={'input bg-white'}
         >
           <option value="">Pilih Spesialisasi</option>
           <option value="DERMATOLOGY">DERMATOLOGY</option>
@@ -92,18 +99,19 @@ export default function DoctorRegisterPage() {
         </select>
 
         <input
+            className={'input'}
           name="licenseNumber"
           value={form.licenseNumber}
           onChange={handleChange}
           placeholder="Nomor STR/SIP"
           required
         />
-        <button type="submit" className="doctor-register-button">
+        <button type="submit" className="button bg-secondary text-white">
           Daftar
         </button>
-        <p>
+        <p className={'text-center text-xs'}>
           Sudah punya akun?
-          <Link to='/doctor/login'>Masuk</Link>
+          <Link className={'text-secondary'} to='/doctor/login'> Masuk</Link>
         </p>
       </form>
     </div>

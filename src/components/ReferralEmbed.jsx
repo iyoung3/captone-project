@@ -24,12 +24,15 @@ function ReferralEmbed({referralId}) {
 
   return (
     <div className={'h-30'}>
-        {loading?<></>
-            : <><h2 className={'w-full'}>Rujukan</h2>
-            <p>{referral.referralReason}</p>
-            <p>{new Date(referral.referralDate).toISOString()}</p>
-            <p className={'text-neutral-600'}>{referral.notes}</p>
-            <Link to={`/referral/${referral.referralId}`}>Lihat detail</Link></>}
+        {loading?
+            <></>
+            :
+            <>
+                <h2 className={'w-full text-3xl font-bold'}>Rujukan</h2>
+                <p>Alasan: {referral.referralReason}</p>
+                <Link className={'underline'} to={`/referral/${referral.referralId}`}>Lihat detail</Link>
+            </>
+        }
     </div>
   );
 

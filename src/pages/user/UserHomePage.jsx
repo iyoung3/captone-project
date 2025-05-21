@@ -7,7 +7,7 @@ import { FaComments, FaStethoscope } from "react-icons/fa";
 export default function UserHomePage() {
   return (
     <AuthUserWrapper>
-      <div className="container mx-auto min-h-screen px-12">
+      <div className="container mx-auto min-h-screen px-12 bg-white">
         <h1 className="text-5xl pt-4">
           <span className="app-name font-black">KONSUL<span className="text-primary">DOK</span></span>
         </h1>
@@ -17,18 +17,7 @@ export default function UserHomePage() {
           <p>Konsultasi dan Rujukan Mudah, Cepat, Aman</p>
         </div>
 
-        <h3 className="w-full text-2xl">Mau melakukan apa hari ini?</h3>
-        <div className="flex flex-wrap my-6">
-          <div className="w-full flex gap-4">
-            <Link to="/user/chat" className="bg-white shadow rounded-xl flex-1 flex items-center p-4 justify-center flex-col">
-              <FaComments size={32} />
-              <span>Chat Dokter</span>
-            </Link>
-            <Link to="/user/doctor-info/:doctorId" className="bg-white shadow rounded-xl flex-1 flex items-center p-4 justify-center flex-col">
-              <FaStethoscope size={32} />
-              <span>Cari Dokter</span>
-            </Link>
-          </div>
+        <div className="my-6">
           <SearchDoctors />
         </div>
       </div>

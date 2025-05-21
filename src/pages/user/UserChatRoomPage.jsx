@@ -9,6 +9,7 @@ import { GoArrowLeft } from "react-icons/go";
 import {FaChevronLeft, FaPaperPlane} from "react-icons/fa";
 import {addDays, format} from 'date-fns'
 import {id} from "date-fns/locale";
+import {MdArrowBackIosNew, MdSend} from "react-icons/md";
 
 const UserChatRoomPage = () => {
   const navigate = useNavigate();
@@ -87,12 +88,12 @@ const UserChatRoomPage = () => {
 
   return (
     <AuthUserWrapper>
-      <div className="container h-screen mx-auto flex flex-col">
-        <div className="bg-primary text-white p-2 flex items-center">
+      <div className="container h-screen mx-auto flex flex-col bg-white">
+        <div className="bg-primary text-white p-2 flex items-center shadow-lg">
           <button onClick={() => navigate("/user/chat")} className="p-4">
-            <FaChevronLeft />
+            <MdArrowBackIosNew />
           </button>
-          <h1 className={'font-bold text-2xl'}>
+          <h1 className={'font-bold text-2xl capitalize'}>
             Dr.{doctorName}
           </h1>
         </div>
@@ -106,7 +107,7 @@ const UserChatRoomPage = () => {
             ) : (
               Object.entries(
                 messages.reduce((acc, msg) => {
-                  const date = format(new Date(msg.createdAt), 'yyyy-MM-dd', { locale: id });
+                  const date = format(new Date(msg.createdAt), 'yyyy-MM-dd');
                   const time = format(new Date(msg.createdAt), 'HH:mm');
                   if (!acc[date]) acc[date] = {};
                   if (!acc[date][time]) acc[date][time] = [];
@@ -145,7 +146,7 @@ const UserChatRoomPage = () => {
                     </Fragment>
                   ))}
                   <div className="text-center text-sm text-neutral-500 my-4">
-                    {format(new Date(date), "EEEE, dd MMMM yyyy")}
+                    {format(new Date(date), "EEEE, dd MMMM yyyy",{ locale: id })}
                   </div>
                 </Fragment>
               ))
@@ -163,7 +164,9 @@ const UserChatRoomPage = () => {
               onChange={(e) => setInput(e.target.value)}
               className="input flex-1 w-full"
             />
-            <button type="submit" className="text-white bg-primary w-12 flex items-center justify-center rounded-md"><FaPaperPlane /></button>
+            <button type="submit" className="text-white bg-primary w-12 flex items-center justify-center rounded-md">
+              <MdSend/>
+            </button>
           </form>
         )}
       </div>
