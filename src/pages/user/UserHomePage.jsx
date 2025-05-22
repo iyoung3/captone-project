@@ -7,7 +7,7 @@ import { FaComments, FaStethoscope } from "react-icons/fa";
 export default function UserHomePage() {
   return (
     <AuthUserWrapper>
-      <div className="container mx-auto min-h-screen px-12 bg-white">
+      <div className="container mx-auto min-h-[100dvh] px-8 bg-white">
         <h1 className="text-5xl pt-4">
           <span className="app-name font-black">KONSUL<span className="text-primary">DOK</span></span>
         </h1>

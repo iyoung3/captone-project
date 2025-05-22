@@ -24,15 +24,9 @@ function ReferralEmbed({referralId}) {
 
   return (
     <div className={'h-30'}>
-        {loading?
-            <></>
-            :
-            <>
-                <h2 className={'w-full text-3xl font-bold'}>Rujukan</h2>
-                <p>Alasan: {referral.referralReason}</p>
-                <Link className={'underline'} to={`/referral/${referral.referralId}`}>Lihat detail</Link>
-            </>
-        }
+      <h2 className={'w-full text-3xl font-bold'}>Rujukan</h2>
+      <p>Alasan: {referral?.referralReason}</p>
+      <Link className={'underline'} to={`/referral/${referral?.referralId}`}>Lihat detail</Link>
     </div>
   );
 

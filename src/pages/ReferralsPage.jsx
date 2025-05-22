@@ -26,7 +26,7 @@ export default function ReferralsPage({isDoctor}) {
 
   return (
       <Guard>
-        <div className={'container mx-auto bg-white px-12 min-h-screen'}>
+        <div className={'container mx-auto bg-white px-8 min-h-[100dvh]'}>
           {isDoctor ? <DoctorNavbar/> : <UserNavbar/>}
           <h1 className={'text-5xl pt-4 mb-12'}>Daftar rujukan</h1>
           <div className="flex flex-col gap-2">

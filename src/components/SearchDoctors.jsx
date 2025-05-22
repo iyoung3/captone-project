@@ -83,13 +83,13 @@ export default function SearchDoctors() {
                       <p className="font-bold capitalize truncate">{doctor.name}</p>
                       <p className={'text-neutral-800 capitalize'}>Spesialis: {doctor.specialization}</p>
                   <p className={'text-xs text-neutral-500'}>Rumah Sakit: {doctor.hospitalAffiliation}</p>
-                </div>
                 <button
                   onClick={() => handleOnClick(doctor.doctorId)}
-                  className="text-primary font-bold mt-6 ml-auto absolute bottom-4 right-4"
+                  className="text-primary font-bold mt-12 ml-auto"
                 >
                   Mulai Konsultasi
                 </button>
+                </div>
               </div>
             ))}
           </div>

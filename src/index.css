@@ -54,7 +54,7 @@ body{
 }
 
 .button{
-  @apply p-3 rounded-md text-sm leading-tight font-bold;
+  @apply p-3 rounded-md text-sm leading-tight font-bold brightness-100 hover:brightness-95 transition-all;
 }
 
 .bg-pattern{

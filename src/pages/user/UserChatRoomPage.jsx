@@ -5,8 +5,6 @@ import ReferralEmbed from "../../components/ReferralEmbed";
 import { fetchChatHistory } from "../../services/userService";
 import { useNavigate } from "react-router-dom";
 import { getDoctorById } from "../../services/userService";
-import { GoArrowLeft } from "react-icons/go";
-import {FaChevronLeft, FaPaperPlane} from "react-icons/fa";
 import {addDays, format} from 'date-fns'
 import {id} from "date-fns/locale";
 import {MdArrowBackIosNew, MdSend} from "react-icons/md";
@@ -161,7 +159,6 @@ const UserChatRoomPage = () => {
           </div>
         </div>
 
-        {permitted && (
           <form onSubmit={handleSend} className="flex gap-2 p-2 bg-white border-t">
             <input
               type="text"
@@ -169,12 +166,12 @@ const UserChatRoomPage = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               className="input flex-1 w-full"
+              disabled={!permitted}
             />
-            <button type="submit" className="text-white bg-primary w-12 flex items-center justify-center rounded-md">
+            {permitted&&<button type="submit" className="text-white bg-primary w-12 flex items-center justify-center rounded-md">
               <MdSend/>
-            </button>
+            </button>}
           </form>
-        )}
       </div>
     </AuthUserWrapper>
   );

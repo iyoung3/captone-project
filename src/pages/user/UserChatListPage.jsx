@@ -20,7 +20,7 @@ export default function UserChatListPage() {
 
   return (
     <AuthUserWrapper>
-      <div className="container mx-auto min-h-screen px-12 bg-white">
+      <div className="container mx-auto min-h-[100dvh] px-8 bg-white">
       <UserNavbar />
       <h2 className="text-5xl mb-8 pt-4">Chat dengan Dokter</h2>
         <div className="flex flex-col divide-y">

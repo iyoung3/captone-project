@@ -260,26 +260,30 @@ const DoctorChatRoomPage = () => {
                 </div>
               </div>
           ) :
-              permitted && <form onSubmit={handleSendMessage} className="flex gap-2 p-2 bg-white border-t">
+            <form onSubmit={handleSendMessage} className="flex gap-2 p-2 bg-white border-t">
             <input
                 type="text"
                 placeholder="Ketik pesan..."
                 value={input}
                 className="input flex-1 w-full"
-                onChange={(e) => setInput(e.target.value)}
+                onChange={(e) => setInput(e.target.value)} disabled={!permitted}
             />
-            <button type="submit" className="text-white bg-secondary w-12 flex items-center justify-center rounded-md">
-              <MdSend/>
-            </button>
+              {permitted && <>
+                <button type="submit" disabled={!permitted}
+                        className="text-white bg-secondary w-12 flex items-center justify-center rounded-md">
+                  <MdSend/>
+                </button>
 
-            <button
-                type="button"
-                onClick={() => setShowReferralForm(true)}
-                className="text-secondary bg-white border border-secondary w-12 flex items-center justify-center rounded-md"
-            >
-              <MdAttachFile/>
-            </button>
-          </form>}
+                <button
+                  type="button"
+                  disabled={!permitted}
+                  onClick={() => setShowReferralForm(true)}
+                  className="text-secondary bg-white border border-secondary w-12 flex items-center justify-center rounded-md"
+                >
+                  <MdAttachFile/>
+                </button>
+              </>}
+            </form>}
         </div>
       </AuthDoctorWrapper>
   );

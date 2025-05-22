@@ -28,9 +28,9 @@ export default function DoctorHomePage() {
     <AuthDoctorWrapper>
       <div>
         <DoctorNavbar />
-        <div className="container mx-auto bg-white px-12 min-h-screen">
+        <div className="container mx-auto bg-white px-8 min-h-[100dvh]">
           <h1 className="text-5xl pt-4">
-            <span className="app-name font-black">KONSUL<span className="text-primary">DOK</span></span>
+            <span className="app-name font-black">KONSUL<span className="text-secondary">DOK</span></span>
           </h1>
           <h2 className="text-3xl pt-4 mb-12 font-bold">Selamat datang, Dokter!</h2>
 

@@ -33,7 +33,7 @@ export default function DoctorRegisterPage() {
   };
 
   return (
-    <div className="container mx-auto min-h-screen flex flex-col items-center px-16">
+    <div className="container mx-auto min-h-[100dvh] flex flex-col items-center px-16">
       <h2 className={'text-5xl text-left w-full mt-8 text-secondary px-6 font-bold'}>Daftar</h2>
       <p className={'text-left text-sm mb-16 w-full px-6 text-neutral-500'}>Sebagai dokter</p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-8 w-full">

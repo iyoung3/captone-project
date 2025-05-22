@@ -45,7 +45,7 @@ export default function ReferralDetailPage() {
   if (!referral) return <p>Data rujukan tidak tersedia.</p>;
 
   return (
-    <div className="container mx-auto bg-white px-12 min-h-screen pt-12">
+    <div className="container mx-auto bg-white px-8 min-h-[100dvh] pt-12">
       <div className="flex flex-col items-center gap-4" ref={printRef}>
         <h2 className={'text-4xl font-bold mb-12'}>Detail Rujukan</h2>
         <QRCodeCanvas value={window.location.href} size={200} className="qr-code" />
