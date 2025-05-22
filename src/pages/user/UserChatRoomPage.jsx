@@ -71,8 +71,13 @@ const UserChatRoomPage = () => {
       };
 
       socket.onclose = (event) => {
-        if (event.code === 4000) setPermitted(false)
         console.log("WebSocket connection closed. ");
+        setPermitted(false)
+        if (event.code === 4000 || event.code === 4001) {
+          return
+        }
+
+        setTimeout(connectWebSocket,1000)
       };
 
       socket.onerror = (error) => {

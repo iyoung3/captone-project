@@ -119,8 +119,11 @@ const DoctorChatRoomPage = () => {
 
       socket.onclose = (event) => {
         setPermitted(false)
-        console.log("WebSocket connection closed.");
-        // setTimeout(connectWebSocket, 1000); // Reconnect after 1 second
+        if (event.code === 4000 || event.code === 4001) {
+          return
+        }
+
+        setTimeout(connectWebSocket,1000)
       };
 
       socket.onerror = (error) => {

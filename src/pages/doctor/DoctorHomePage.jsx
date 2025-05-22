@@ -48,7 +48,8 @@ export default function DoctorHomePage() {
                       </div>
                       <div className="chat-info">
                         <div className="chat-name font-bold capitalize">{chat.userName}</div>
-                        <div className="chat-preview">Klik untuk buka percakapan</div>
+                        <div
+                          className="text-neutral-500">{chat.latestChat ? chat.latestChat.message : 'Mulai percakapan'}</div>
                       </div>
                     </Link>
                 ))

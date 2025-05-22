@@ -3,6 +3,7 @@ import UserNavbar from "../../components/UserNavbar";
 import { AuthUserWrapper } from "../../components/AuthUserWrapper";
 import { useEffect, useState } from "react";
 import { getChats } from "../../services/userService";
+import {format, isSameDay } from "date-fns";
 
 export default function UserChatListPage() {
   const [chats, setChats] = useState([]);
@@ -32,9 +33,16 @@ export default function UserChatListPage() {
                 <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200 text-gray-700 font-bold text-xl mr-4">
                   {chat.doctorName?.charAt(0).toUpperCase() || "D"}
                 </div>
-                <div className="chat-info">
-                  <div className="chat-name font-bold capitalize">Dr. {chat.doctorName}</div>
-                  <div className="chat-preview">Klik untuk buka percakapan</div>
+                <div className="chat-info w-full">
+                  <div className="chat-name flex w-full">
+                    <span className={'font-bold'}>
+                      Dr. {chat.doctorName}
+                    </span>
+                    <span className={'ml-auto text-neutral-500 text-xs'}>
+                      {chat.latestChat? format(chat.latestChat.createdAt,isSameDay(chat.latestChat.createdAt, new Date())?'HH:mm':'dd MMMM yyyy') :''}
+                    </span>
+                  </div>
+                  <div className="text-neutral-500">{chat.latestChat? chat.latestChat.message:'Mulai percakapan'}</div>
                 </div>
               </Link>
             ))
