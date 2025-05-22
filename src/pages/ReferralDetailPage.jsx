@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { getReferralById } from "../services/userService";
-import { QRCodeCanvas } from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react';
 import {format} from "date-fns";
 import {id} from "date-fns/locale";
 
@@ -48,7 +48,7 @@ export default function ReferralDetailPage() {
     <div className="container mx-auto bg-white px-8 min-h-[100dvh] pt-12">
       <div className="flex flex-col items-center gap-4" ref={printRef}>
         <h2 className={'text-4xl font-bold mb-12'}>Detail Rujukan</h2>
-        <QRCodeCanvas value={window.location.href} size={200} className="qr-code" />
+        <QRCodeSVG value={window.location.href} size={200} className="qr-code" />
 
         <div className="referral-detail space-y-2 my-12">
           <p><strong>ID Rujukan:</strong> {referral.referralId}</p>
