@@ -3,6 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import DoctorNavbar from "../../components/DoctorNavbar";
 import {AuthDoctorWrapper} from "../../components/AuthDoctorWrapper";
 import {getChats} from "../../services/doctorService";
+import {format, isSameDay} from "date-fns";
 
 export default function DoctorHomePage() {
   const navigate = useNavigate();
@@ -47,7 +48,14 @@ export default function DoctorHomePage() {
                         {chat.userName?.charAt(0).toUpperCase() || "D"}
                       </div>
                       <div className="chat-info">
-                        <div className="chat-name font-bold capitalize">{chat.userName}</div>
+                        <div className="chat-name flex w-full">
+                        <span className={'font-bold'}>
+                          {chat.userName}
+                        </span>
+                              <span className={'ml-auto text-neutral-500 text-xs'}>
+                          {chat.latestChat ? format(chat.latestChat.createdAt, isSameDay(chat.latestChat.createdAt, new Date()) ? 'HH:mm' : 'dd MMMM yyyy') : ''}
+                        </span>
+                            </div>
                         <div
                           className="text-neutral-500">{chat.latestChat ? chat.latestChat.message : 'Mulai percakapan'}</div>
                       </div>
